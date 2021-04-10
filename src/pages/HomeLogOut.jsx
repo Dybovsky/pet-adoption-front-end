@@ -8,10 +8,10 @@ const HomeLogOut = () => {
 
 
     return(
-        <div>
+        <div className='headerIn'>
             <Header />
             <About />
-            <LogInSignUp />
+            <LogInSignUp/>
             <ToSearchPage />
         </div>
     )

@@ -1,8 +1,12 @@
+import { Link } from 'react-router-dom'
+
 const ToMyPetsPage = () => {
 
     return(
         <div>
-            <button>Go to my pets</button>
+            <Link to="/myPets">
+                <button>Go to my pets</button>
+            </Link>
            
         </div>
     )

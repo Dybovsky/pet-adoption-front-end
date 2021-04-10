@@ -7,7 +7,9 @@ const HeaderAuth = () => {
 
     return(
         <header>
-                {`Glad to see you again Mr.${user.firstName}`}
+                <h3 className='headerTxt'>
+                    {`Glad to see you again Mr.${user.firstName}`}
+                </h3>
         </header>
     )
 }

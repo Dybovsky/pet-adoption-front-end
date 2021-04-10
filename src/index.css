@@ -1,13 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* font-family: "Zilla Slab Highlight", cursive; */
+  font-family: "RocknRoll One", sans-serif;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.main {
+  background-image: url(./images/CatMain.jpeg);
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.headerTxt {
+  background-color: #f2b56b;
+}
+
+.navigation {
+  background-color: #cd8940;
+  height: 5rem;
+  margin-bottom: -21px;
+  display: flex;
+}
+
+.headerIn {
+  background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.85), transparent);
+  color: aliceblue;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 11rem;
+}
+
+.about {
+  /* text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3); */
+}
+
+/* .logoHome {
+  background-image: url(./images/LogoCat.png);
+} */
+
+.SignUp {
+  display: flex;
+  flex-direction: column;
 }

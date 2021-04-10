@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../AuthContext'
 
-const SignUpForm = () => {
+
+const SignUpForm = (props) => {
+    const user = useContext(AuthContext)
     const [ signUpUser, setSignUpUser] = useState({
         firstName: '',
         lastName: '',
@@ -16,13 +19,16 @@ const SignUpForm = () => {
         password: '',
     }) 
 
-    const submitSignUp = e => {
+    const submitSignUp = (e) => {
         e.preventDefault();
         //
     }
-
+    
     const submitLogIn = e => {
         e.preventDefault();
+        user.login(logInUser)
+
+        //props.onLogIn(logInUser)
         //
     }
 
