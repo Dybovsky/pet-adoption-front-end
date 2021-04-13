@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import {AuthContext} from '../components/AuthContext'
 
 const Settings = () => {
+
+    const authUser = useContext(AuthContext)
 
    const [updatedUser, setUpdatedUser] = useState({
         firstName: '',
@@ -12,6 +15,9 @@ const Settings = () => {
 
    const saveSettings = (e) => {
        e.preventDefault()
+       authUser.update(updatedUser)
+
+
 
    } 
 
@@ -23,10 +29,10 @@ const Settings = () => {
 }
 
     return(
-        <div>
+        <div className='settings'>
             <form onSubmit={saveSettings}>
                 Set your profile
-                <label>
+                <label className='form-row'>
                     First name: 
                     <input
                         value={updatedUser.firstName}
@@ -35,7 +41,7 @@ const Settings = () => {
                         onChange={updateUser}
                     />
                 </label>
-                <label>
+                <label className='form-row'>
                     Last name: 
                     <input
                         value={updatedUser.lastName}
@@ -44,7 +50,7 @@ const Settings = () => {
                         onChange={updateUser}
                     />
                 </label>
-                <label>
+                <label className='form-row'>
                     Email: 
                     <input
                         value={updatedUser.email}
@@ -53,7 +59,7 @@ const Settings = () => {
                         onChange={updateUser}
                     />
                 </label>
-                <label>
+                <label className='form-row'>
                     Phone: 
                     <input
                         value={updatedUser.phone}
@@ -62,7 +68,7 @@ const Settings = () => {
                         onChange={updateUser}
                     />
                 </label>
-                <label>
+                <label className='form-row'>
                     Password: 
                     <input
                         value={updatedUser.password}

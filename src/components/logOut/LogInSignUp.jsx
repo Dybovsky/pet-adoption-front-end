@@ -17,6 +17,7 @@ const LogInSignUp = () => {
                Log In / Sign Up
            </button>
            <Modal
+           //style={{width: "80px"}}
            isOpen = {isModalOpen}
            onRequestClose = {() => setIsModalOpen(false)}
            >

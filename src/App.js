@@ -19,6 +19,7 @@ function App() {
         authUser,
         login: (us) => setAuthUser(us),
         logout: () => setAuthUser(null),
+        update: (usr) => setAuthUser(usr),
       }}
     >
       <Router>

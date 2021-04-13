@@ -11,8 +11,10 @@ const HomeLogOut = () => {
         <div className='headerIn'>
             <Header />
             <About />
-            <LogInSignUp/>
-            <ToSearchPage />
+            <div className='btnsLogout'>
+                <LogInSignUp/>
+                <ToSearchPage />
+            </div>
         </div>
     )
 }

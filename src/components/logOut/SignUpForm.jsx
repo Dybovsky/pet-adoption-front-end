@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../AuthContext'
+import mocUsers from '../../MocData/users'
 
 
 const SignUpForm = (props) => {
@@ -21,6 +22,9 @@ const SignUpForm = (props) => {
 
     const submitSignUp = (e) => {
         e.preventDefault();
+        mocUsers.push(signUpUser)
+        user.login(signUpUser)
+
         //
     }
     
@@ -51,7 +55,7 @@ const SignUpForm = (props) => {
         <div className='SignUp'>
             <h3>SignUp</h3>
             <form onSubmit={submitSignUp}>
-                <label>
+                <label className='form-row'>
                     First name: 
                     <input
                         value={signUpUser.firstName}
@@ -60,7 +64,7 @@ const SignUpForm = (props) => {
                         onChange={updateSignUp}
                     />
                 </label>
-                <label>
+                <label className='form-row'>
                     Last name: 
                     <input
                         value={signUpUser.lastName}
@@ -69,7 +73,7 @@ const SignUpForm = (props) => {
                         onChange={updateSignUp}
                     />
                 </label>
-                <label>
+                <label className='form-row'>
                     Email: 
                     <input
                         value={signUpUser.email}
@@ -78,7 +82,7 @@ const SignUpForm = (props) => {
                         onChange={updateSignUp}
                     />
                 </label>
-                <label>
+                <label className='form-row'>
                     Phone: 
                     <input
                         value={signUpUser.phone}
@@ -87,7 +91,7 @@ const SignUpForm = (props) => {
                         onChange={updateSignUp}
                     />
                 </label>
-                <label>
+                <label className='form-row'>
                     Password: 
                     <input
                         value={signUpUser.password}
@@ -96,7 +100,7 @@ const SignUpForm = (props) => {
                         onChange={updateSignUp}
                     />
                 </label>
-                <label>
+                <label className='form-row'>
                     Password check: 
                     <input
                         value={signUpUser.passwordCheck}
@@ -111,7 +115,7 @@ const SignUpForm = (props) => {
         <div className='LogIn'>
         <h3>LogIn</h3>
             <form onSubmit={submitLogIn}>
-                <label>
+                <label className='form-row'>
                     Email:
                     <input
                         value={logInUser.email}
@@ -120,7 +124,7 @@ const SignUpForm = (props) => {
                         onChange={updateLogIn}
                     />
                 </label>
-                <label>
+                <label className='form-row'>
                     Password:
                     <input
                         value={logInUser.password}

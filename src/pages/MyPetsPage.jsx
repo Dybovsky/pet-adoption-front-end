@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import SavedPets from '../components/MyPets/SavedPets'
 
+
+
 const MyPetsPage = () => {
 
     
@@ -24,6 +26,7 @@ const MyPetsPage = () => {
 
     return(
         <div>
+
             {!myPets && <h2>You dont have any fat cats</h2>}
             {myPets && <SavedPets myPets={myPets}/>}
         </div>

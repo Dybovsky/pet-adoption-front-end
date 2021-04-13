@@ -1,19 +1,22 @@
 import {Link} from "react-router-dom";
-//import ToSearchPage from "../components/logOut/ToSearchPage";
 import LogOut from '../lib/LogOut'
+import {AuthContext} from '../components/AuthContext'
+import { useContext } from "react";
 
 const Navigation = () => {
+
+  const authUser = useContext(AuthContext).authUser
     return (
       <div className='navigation'>
         {/* <Link to="/search">
             <ToSearchPage />
         </Link> */}
         <Link to="/">
-       <div className='logoHome1'>
-         <img src="LogoCat.png" width='70' height='60' alt='home'/>
+       <div>
+         <img src="LogoCat.png" width='120' height='100' alt='home'/>
        </div>
          </Link>
-        <LogOut />
+        {authUser && <LogOut />}
       </div>
     );
   };
