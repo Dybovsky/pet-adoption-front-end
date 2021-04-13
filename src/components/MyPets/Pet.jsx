@@ -1,13 +1,26 @@
+import Modal from 'react-modal';
+import {useState} from 'react';
+import PetDetails from './PetDetails';
+
+
 const Pet = (props) => {
     const {pet} = props
+
+
+    const[isModalOpen, setIsModalOpen ] = useState(false)
+    
     return(
         <div>
             {/* pet.img
             pet.name
             pet.status
              */}
-             <div>
-                 {pet.img}
+             <div 
+             onClick={() => setIsModalOpen(true)}
+             >
+                 <img src={pet.image}
+                    alt='cat'     
+                />
              </div>
              <div>
                  {pet.name}
@@ -16,9 +29,18 @@ const Pet = (props) => {
                  {pet.status}
              </div>
 
-             <button>
-                 See more
+             <button 
+             onClick={() => setIsModalOpen(true)}
+             >
+                ggggg
              </button>
+             <Modal
+                isOpen = {isModalOpen}
+                onRequestClose = {() => setIsModalOpen(false)}
+             >
+               <PetDetails />
+
+           </Modal>
         </div>
     )
 }

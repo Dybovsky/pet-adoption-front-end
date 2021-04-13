@@ -1,34 +1,33 @@
-import { useState } from 'react'
-import SavedPets from '../components/MyPets/SavedPets'
-
+import { useState, useEffect} from 'react'
+import PetsList from '../components/MyPets/PetsList'
+import Toggle from '../components/MyPets/Toggle' 
+import allPets from '../MocData/allPets.js'
 
 
 const MyPetsPage = () => {
 
     
-    const fatBarsik = {
-        id: Date.now()+1,
-        image: 'cat',
-        name: 'Barsik',
-        status: 'foster/adopted',
+    
+ 
+    const [ myPets, setMyPets] = useState(allPets)
+    const [ isChecked, setIsChecked] = useState(true)
+
+    const onToggle = (val) => {
+        setIsChecked(val)
     }
+    let savedPets = allPets.filter(pet => pet.saved)
+    
+    useEffect(() => {
 
-    const fatMurzik = {
-        id: Date.now(),
-        image: 'cat',
-        name: 'Murzik',
-        status: 'foster/adopted',
-    }
+        isChecked ? setMyPets(savedPets) : setMyPets(allPets)
+    },[isChecked])
 
-
-
-    const [ myPets, setMyPets] = useState([fatBarsik, fatMurzik])
 
     return(
         <div>
-
+            <Toggle onToggle={onToggle}/>
             {!myPets && <h2>You dont have any fat cats</h2>}
-            {myPets && <SavedPets myPets={myPets}/>}
+            {myPets && <PetsList myPets={myPets}/>}
         </div>
     )
 

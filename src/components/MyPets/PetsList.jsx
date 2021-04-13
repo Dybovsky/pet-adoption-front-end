@@ -1,6 +1,6 @@
 import Pet from './Pet'
 
-const SavedPets = (props) => {
+const PetsList = (props) => {
     const { myPets } = props
     return(
         <div>
@@ -10,11 +10,11 @@ const SavedPets = (props) => {
                     pet={pet}
                     key={pet.id}
                     />)}
-                    {console.log(myPets)}
+                    
             </ul>
         </div>
     )
 
 }
 
-export default SavedPets
+export default PetsList
