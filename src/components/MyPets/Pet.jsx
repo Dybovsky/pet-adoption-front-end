@@ -32,13 +32,13 @@ const Pet = (props) => {
              <button 
              onClick={() => setIsModalOpen(true)}
              >
-                ggggg
+                See more
              </button>
              <Modal
                 isOpen = {isModalOpen}
                 onRequestClose = {() => setIsModalOpen(false)}
-             >
-               <PetDetails />
+             > 
+               <PetDetails pet={pet}/>
 
            </Modal>
         </div>

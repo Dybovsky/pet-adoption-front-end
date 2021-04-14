@@ -7,10 +7,9 @@ import Navigation from "./pages/Navigation";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MyPetsPage from "./pages/MyPetsPage";
 import Settings from "./pages/Settings";
-
+import AdvancedSearch from "./components/Search/AdvancedSearch";
+import Admin from "./pages/Admin.jsx";
 function App() {
-  // const user = { firstName: "vasya" };
-
   const [authUser, setAuthUser] = useState(null);
 
   return (
@@ -39,6 +38,12 @@ function App() {
           </Route>
           <Route path="/settings">
             <Settings />
+          </Route>
+          <Route path="/advanced_search">
+            <AdvancedSearch />
+          </Route>
+          <Route path="/admin">
+            <Admin />
           </Route>
         </Switch>
       </Router>

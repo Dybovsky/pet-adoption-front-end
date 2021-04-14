@@ -6,11 +6,8 @@ import allPets from '../MocData/allPets.js'
 
 const MyPetsPage = () => {
 
-    
-    
- 
-    const [ myPets, setMyPets] = useState(allPets)
-    const [ isChecked, setIsChecked] = useState(true)
+    const [ myPets, setMyPets] = useState()
+    const [ isChecked, setIsChecked] = useState(false)
 
     const onToggle = (val) => {
         setIsChecked(val)
@@ -19,7 +16,7 @@ const MyPetsPage = () => {
     
     useEffect(() => {
 
-        isChecked ? setMyPets(savedPets) : setMyPets(allPets)
+        isChecked ? setMyPets(savedPets) : setMyPets()
     },[isChecked])
 
 
