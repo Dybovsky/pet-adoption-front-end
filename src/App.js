@@ -39,9 +39,9 @@ function App() {
           <Route path="/settings">
             <Settings />
           </Route>
-          <Route path="/advanced_search">
+          {/* <Route path="/advanced_search">
             <AdvancedSearch />
-          </Route>
+          </Route> */}
           <Route path="/admin">
             <Admin />
           </Route>

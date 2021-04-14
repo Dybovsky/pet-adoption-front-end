@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import { Link } from "react-router-dom";
+import ToAdvancedSearchBtn from '../components/Search/ToAdvancedSearchBtn'
 
 const Search = () => {
 
@@ -15,7 +16,7 @@ const Search = () => {
                     onChange={handleInput}/>
             </label>
             <button>Search</button>
-            <button ><Link to="/advanced_search">more fields</Link></button>
+            <ToAdvancedSearchBtn />
         </div>
     )
 }

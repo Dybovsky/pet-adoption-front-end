@@ -1,12 +1,13 @@
-import AddPet from './AddPet'
-import Dashboard from './Dashboard'
+
+import ToDashboardBtn from '../components/admin/ToDashboardBtn'
+import AddPetBtn from '../components/admin/AddPetBtn'
 
 
 const Admin = () => {
     return(
         <div>
-            <AddPet />
-            <Dashboard />
+            <AddPetBtn />
+            <ToDashboardBtn />
         </div>
     )
 }
