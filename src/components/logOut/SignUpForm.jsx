@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../AuthContext'
 import mocUsers from '../../MocData/users'
+import { createUser } from '../../lib/apiUsers';
 
 
 const SignUpForm = (props) => {
@@ -22,8 +23,10 @@ const SignUpForm = (props) => {
 
     const submitSignUp = (e) => {
         e.preventDefault();
-        mocUsers.push(signUpUser)
+        // mocUsers.push(signUpUser)
         user.login(signUpUser)
+        //createUser(signUpUser)
+        createUser(JSON.stringify(signUpUser))
 
         //
     }

@@ -9,6 +9,7 @@ import MyPetsPage from "./pages/MyPetsPage";
 import Settings from "./pages/Settings";
 import AdvancedSearch from "./components/Search/AdvancedSearch";
 import Admin from "./pages/Admin.jsx";
+
 function App() {
   const [authUser, setAuthUser] = useState(null);
 
