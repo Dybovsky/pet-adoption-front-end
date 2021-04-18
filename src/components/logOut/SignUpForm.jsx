@@ -21,12 +21,22 @@ const SignUpForm = (props) => {
         password: '',
     }) 
 
+    const authUser = {
+        "firstName": "111rr3333r",
+      "lastName": "rr33333r",
+      "email": "rrr33333r",
+      "phone": 11199999911,
+      "password": "22222",
+      "passwordCheck": "2222"
+    }
+
     const submitSignUp = (e) => {
         e.preventDefault();
         // mocUsers.push(signUpUser)
         user.login(signUpUser)
-        //createUser(signUpUser)
-        createUser(JSON.stringify(signUpUser))
+        //const authUser = JSON.stringify(signUpUser)
+        createUser(signUpUser)
+        console.log(signUpUser)
 
         //
     }

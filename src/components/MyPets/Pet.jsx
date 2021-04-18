@@ -1,48 +1,30 @@
-import Modal from 'react-modal';
-import {useState} from 'react';
-import PetDetails from './PetDetails';
-
+import Modal from "react-modal";
+import { useState } from "react";
+import PetDetails from "./PetDetails";
 
 const Pet = (props) => {
-    const {pet} = props
+  const { pet } = props;
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const[isModalOpen, setIsModalOpen ] = useState(false)
-    
-    return(
-        <div>
-            {/* pet.img
+  return (
+    <div>
+      {/* pet.img
             pet.name
             pet.status
              */}
-             <div 
-             onClick={() => setIsModalOpen(true)}
-             >
-                 <img src={pet.image}
-                    alt='cat'     
-                />
-             </div>
-             <div>
-                 {pet.name}
-             </div>
-             <div>
-                 {pet.status}
-             </div>
+      <div onClick={() => setIsModalOpen(true)}>
+        <img src={pet.image} alt="cat" />
+      </div>
+      <div>{pet.name}</div>
+      <div>{pet.status}</div>
 
-             <button 
-             onClick={() => setIsModalOpen(true)}
-             >
-                See more
-             </button>
-             <Modal
-                isOpen = {isModalOpen}
-                onRequestClose = {() => setIsModalOpen(false)}
-             > 
-               <PetDetails pet={pet}/>
+      <button onClick={() => setIsModalOpen(true)}>See more</button>
+      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
+        <PetDetails pet={pet} />
+      </Modal>
+    </div>
+  );
+};
 
-           </Modal>
-        </div>
-    )
-}
-
-export default Pet
+export default Pet;

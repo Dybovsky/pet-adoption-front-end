@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import HomeLogOut from "./pages/HomeLogOut";
 import HomeLogIn from "./pages/HomeLogIn";
 import { AuthContext } from "./components/AuthContext";
 import Search from "./pages/Search";
 import Navigation from "./pages/Navigation";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MyPetsPage from "./pages/MyPetsPage";
 import Settings from "./pages/Settings";
-import AdvancedSearch from "./components/Search/AdvancedSearch";
 import Admin from "./pages/Admin.jsx";
 
 function App() {
