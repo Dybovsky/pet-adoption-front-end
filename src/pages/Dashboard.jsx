@@ -19,7 +19,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      Dashboard Users
+      Users
       <UsersList users={users} />
       Pets
       <PetsList pets={pets} />

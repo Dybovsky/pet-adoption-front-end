@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthContext";
-import { createUser } from "../../lib/data/apiUsers";
+import { createUser, getUserByEmail, logIn } from "../../lib/data/apiUsers";
 
 const SignUpForm = (props) => {
   const user = useContext(AuthContext);
@@ -18,14 +18,14 @@ const SignUpForm = (props) => {
     password: "",
   });
 
-  const authUser = {
-    firstName: "111rr3333r",
-    lastName: "rr33333r",
-    email: "rrr33333r",
-    phone: 11199999911,
-    password: "22222",
-    passwordCheck: "2222",
-  };
+  // const authUser = {
+  //   firstName: "111rr3333r",
+  //   lastName: "rr33333r",
+  //   email: "rrr33333r",
+  //   phone: 11199999911,
+  //   password: "22222",
+  //   passwordCheck: "2222",
+  // };
 
   const submitSignUp = (e) => {
     e.preventDefault();
@@ -38,10 +38,15 @@ const SignUpForm = (props) => {
     //
   };
 
-  const submitLogIn = (e) => {
+  const submitLogIn = async (e) => {
     e.preventDefault();
-    user.login(logInUser);
-
+    try {
+      let authUser = await logIn(logInUser);
+      let curUser = await getUserByEmail(authUser.email);
+      user.login(curUser);
+    } catch (err) {
+      console.error(err);
+    }
     //props.onLogIn(logInUser)
     //
   };
