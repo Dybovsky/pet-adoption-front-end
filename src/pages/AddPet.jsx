@@ -1,19 +1,14 @@
-import axios from "axios";
 import { useState } from "react";
+import { addPet } from "../lib/data/pets";
 
 const AddPet = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    savePet(newPet);
-  };
-
   const [newPet, setNewPet] = useState({
     type: "",
     breed: "",
     name: "",
     status: "",
-    height: "",
-    weight: "",
+    height: 0,
+    weight: 0,
     picture: "",
     color: "",
     bio: "",
@@ -21,19 +16,29 @@ const AddPet = () => {
     diet: "",
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(newPet);
+    addPet(newPet);
+    setNewPet({
+      type: "",
+      breed: "",
+      name: "",
+      status: "",
+      height: 0,
+      weight: 0,
+      picture: "",
+      color: "",
+      bio: "",
+      allergy: "",
+      diet: "",
+    });
+  };
   const updateNewPet = (e) => {
     setNewPet({
       ...newPet,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const savePet = async (pet) => {
-    const json = JSON.stringify(pet);
-    console.log(json);
-    const response = await axios.post("http://localhost:5500/pet", { pet });
-    // console.log(newPet);
-    // console.log(response);
   };
 
   return (

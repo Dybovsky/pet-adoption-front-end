@@ -1,20 +1,17 @@
-import Pet from './Pet'
+import Pet from "./Pet";
 
 const PetsList = (props) => {
-    const { myPets } = props
-    return(
-        <div>
-            <ul>
-                {myPets.map(pet =>
-                    <Pet 
-                    pet={pet}
-                    key={pet.id}
-                    />)}
-                    
-            </ul>
-        </div>
-    )
+  const { pets } = props;
 
-}
+  return (
+    <div>
+      <ul>
+        {pets.map((pet) => (
+          <Pet pet={pet} key={pet.id} />
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-export default PetsList
+export default PetsList;
