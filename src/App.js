@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import HomeLogOut from "./pages/HomeLogOut";
@@ -9,9 +9,22 @@ import Navigation from "./pages/Navigation";
 import MyPetsPage from "./pages/MyPetsPage";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin.jsx";
+import { getPets } from "./lib/data/pets";
+import { getUsers } from "./lib/data/apiUsers";
 
 function App() {
   const [authUser, setAuthUser] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [pets, setPets] = useState([]);
+
+  useEffect(() => {
+    getUsers().then((users) => {
+      setUsers(users);
+    });
+    getPets().then((pets) => {
+      setPets(pets.pets);
+    });
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -32,7 +45,7 @@ function App() {
             </div>
           </Route>
           <Route path="/search">
-            <Search />
+            <Search pets={pets} />
           </Route>
           <Route path="/myPets">
             <MyPetsPage />
@@ -44,7 +57,7 @@ function App() {
             <AdvancedSearch />
           </Route> */}
           <Route path="/admin">
-            <Admin />
+            <Admin users={users} pets={pets} />
           </Route>
         </Switch>
       </Router>

@@ -27,7 +27,7 @@ const PetDetails = ({ pet }) => {
       <div>Diet: {pet.diet}</div>
 
       {(isFoster || isAdopted) && <button>Return pet</button>}
-      <button onClick={() => saveCat}>
+      <button onClick={() => saveCat()}>
         {pet.saved ? "Remove from saves" : "Save"}
       </button>
     </div>

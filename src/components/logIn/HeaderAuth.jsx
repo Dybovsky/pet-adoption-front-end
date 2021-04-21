@@ -3,7 +3,7 @@ import { AuthContext } from "../AuthContext";
 
 const HeaderAuth = () => {
   const user = useContext(AuthContext).authUser;
-  console.log(user);
+
   return (
     <header>
       <h3 className="headerTxt">

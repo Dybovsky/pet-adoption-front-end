@@ -1,24 +1,25 @@
-import {useState} from 'react'
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import ToAdvancedSearchBtn from '../components/Search/ToAdvancedSearchBtn'
+import PetsList from "../components/MyPets/PetsList";
+import ToAdvancedSearchBtn from "../components/Search/ToAdvancedSearchBtn";
 
-const Search = () => {
+const Search = ({ pets }) => {
+  const [searchField, setSearchField] = useState("");
 
-    const [searchField, setSearchField] = useState('')
+  const handleInput = (e) => {
+    setSearchField(e.target.value);
+  };
 
-    const handleInput = e => {setSearchField(e.target.value)}
+  return (
+    <div>
+      <label htmlFor="search">
+        <input type="search" onChange={handleInput} />
+      </label>
+      <button>Search</button>
+      <ToAdvancedSearchBtn />
+      <PetsList pets={pets} />
+    </div>
+  );
+};
 
-    return(
-        <div>
-            <label htmlFor='search'>
-                <input 
-                    type='search'
-                    onChange={handleInput}/>
-            </label>
-            <button>Search</button>
-            <ToAdvancedSearchBtn />
-        </div>
-    )
-}
-
-export default Search
+export default Search;
