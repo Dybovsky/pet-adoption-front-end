@@ -1,8 +1,8 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
 export const AuthContext = createContext({
-    authUser: null,
-    login: (authUser) => {},
-    logout: () => {},
-    update: (usr) => {},
+  authUser: null,
+  login: (authUser) => {},
+  logout: () => {},
+  update: (usr) => {},
 });

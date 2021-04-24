@@ -14,7 +14,7 @@ const Pet = (props) => {
             pet.status
              */}
       <div onClick={() => setIsModalOpen(true)}>
-        <img src={pet.image} alt="cat" />
+        <img src={pet.picture} alt="cat" />
       </div>
       <div>{pet.name}</div>
       <div>{pet.status}</div>

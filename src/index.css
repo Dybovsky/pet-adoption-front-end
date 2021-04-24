@@ -66,6 +66,8 @@ code {
 }
 
 .form-row {
+  background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.35), transparent);
+  color: aliceblue;
   display: flex;
   justify-content: space-between;
   padding: 0.5em;

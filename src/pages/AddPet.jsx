@@ -1,7 +1,10 @@
-import { useState } from "react";
-import { addPet } from "../lib/data/pets";
+import { useState, useContext } from "react";
+import { addPet, setPetImage } from "../lib/data/pets";
+import { AuthContext } from "../components/AuthContext";
 
 const AddPet = () => {
+  const [pic, setPic] = useState(null);
+  const authUser = useContext(AuthContext).authUser;
   const [newPet, setNewPet] = useState({
     type: "",
     breed: "",
@@ -18,7 +21,6 @@ const AddPet = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newPet);
     addPet(newPet);
     setNewPet({
       type: "",
@@ -27,18 +29,23 @@ const AddPet = () => {
       status: "",
       height: 0,
       weight: 0,
-      picture: "",
+      picture: pic,
       color: "",
       bio: "",
       allergy: "",
       diet: "",
     });
+    // setPetImage(, );
   };
   const updateNewPet = (e) => {
     setNewPet({
       ...newPet,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const updateNewPetPic = (e) => {
+    setPic(e.target.files[0]);
   };
 
   return (
@@ -104,8 +111,9 @@ const AddPet = () => {
           <input
             value={newPet.picture}
             name="picture"
-            type="text"
-            onChange={updateNewPet}
+            type="file"
+            onChange={updateNewPetPic}
+            //onChange={(e) => setPic(e.target.files[0])}
           />
         </label>
         <label className="form-row">

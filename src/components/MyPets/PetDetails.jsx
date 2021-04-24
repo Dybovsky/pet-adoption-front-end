@@ -14,7 +14,7 @@ const PetDetails = ({ pet }) => {
   return (
     <div>
       <div>
-        <img src={pet.image} alt="cat" />
+        <img src={pet.picture} alt="cat" />
       </div>
       <div>Name: {pet.name}</div>
       <div>Status: {pet.status}</div>

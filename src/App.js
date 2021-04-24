@@ -30,7 +30,9 @@ function App() {
     <AuthContext.Provider
       value={{
         authUser,
-        login: (us) => setAuthUser(us),
+        login: (us) => {
+          setAuthUser(us);
+        },
         logout: () => setAuthUser(null),
         update: (usr) => setAuthUser(usr),
       }}
@@ -41,6 +43,9 @@ function App() {
           <Route exact path="/">
             <div className="main">
               {!authUser && <HomeLogOut />}
+              {authUser && authUser.role === "admin" && (
+                <Admin users={users} pets={pets} />
+              )}
               {authUser && <HomeLogIn />}
             </div>
           </Route>
@@ -56,9 +61,9 @@ function App() {
           {/* <Route path="/advanced_search">
             <AdvancedSearch />
           </Route> */}
-          <Route path="/admin">
+          {/* <Route path="/admin">
             <Admin users={users} pets={pets} />
-          </Route>
+          </Route> */}
         </Switch>
       </Router>
     </AuthContext.Provider>
