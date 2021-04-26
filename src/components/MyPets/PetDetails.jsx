@@ -1,5 +1,7 @@
 import { AuthContext } from "../AuthContext";
 import { useContext } from "react";
+import { deletePet } from "../../lib/data/pets";
+import { Link } from "react-router-dom";
 
 const PetDetails = ({ pet }) => {
   let authUser = useContext(AuthContext).authUser;
@@ -11,6 +13,7 @@ const PetDetails = ({ pet }) => {
 
   let isAdopted = pet.status === "adopted";
   let isFoster = pet.status === "foster";
+  console.log(pet);
   return (
     <div>
       <div>
@@ -30,6 +33,8 @@ const PetDetails = ({ pet }) => {
       <button onClick={() => saveCat()}>
         {pet.saved ? "Remove from saves" : "Save"}
       </button>
+      <button onClick={() => deletePet()}>Delete</button>
+      <Link to={`pet/${pet.id}`}>To pet page</Link>
     </div>
   );
 };

@@ -2,10 +2,18 @@ import axios from "axios";
 
 const BaseUrl = "http://localhost:5500/pet";
 
-export async function addPet(pet) {
+export async function addPet(pet, token) {
   //const json = JSON.stringify(pet);
   //const response =
   // console.log(pet);
+  await axios({
+    method: "put",
+    url: BaseUrl,
+    data: pet,
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
   await axios.post(BaseUrl, pet);
 }
 
@@ -32,4 +40,27 @@ export async function setPetImage(petId, token, picture) {
     .catch(function (response) {
       console.log(response);
     });
+}
+
+export async function deletePet(petId, token) {
+  await axios({
+    method: "delete",
+    url: `${BaseUrl}/${petId}/`,
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
+}
+
+export async function getPetById(petId, token) {
+  const result = await axios({
+    method: "get",
+    url: `${BaseUrl}/${petId}/`,
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
+  console.log("result", result);
+  return result;
+  // .data.response[0];
 }

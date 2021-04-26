@@ -42,7 +42,9 @@ const SignUpForm = (props) => {
     e.preventDefault();
     try {
       let authUser = await logIn(logInUser);
-      let curUser = await getUserByEmail(authUser.email);
+      let token = authUser.token;
+      let curUser = await getUserByEmail(authUser.user.email);
+      curUser.token = token;
       user.login(curUser);
     } catch (err) {
       console.error(err);

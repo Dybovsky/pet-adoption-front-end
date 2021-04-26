@@ -29,7 +29,7 @@ const AddPet = () => {
       status: "",
       height: 0,
       weight: 0,
-      picture: pic,
+      picture: "",
       color: "",
       bio: "",
       allergy: "",
@@ -44,9 +44,9 @@ const AddPet = () => {
     });
   };
 
-  const updateNewPetPic = (e) => {
-    setPic(e.target.files[0]);
-  };
+  // const updateNewPetPic = (e) => {
+  //   setPic(e.target.files[0]);
+  // };
 
   return (
     <div>
@@ -111,8 +111,8 @@ const AddPet = () => {
           <input
             value={newPet.picture}
             name="picture"
-            type="file"
-            onChange={updateNewPetPic}
+            type="text"
+            onChange={updateNewPet}
             //onChange={(e) => setPic(e.target.files[0])}
           />
         </label>

@@ -15,7 +15,7 @@ export async function createUser(user) {
 
 export async function logIn(loginUser) {
   const response = await axios.post(`${BaseUrl}/login`, loginUser);
-  return response.data.user;
+  return response.data;
 }
 
 export async function getUserByEmail(email) {

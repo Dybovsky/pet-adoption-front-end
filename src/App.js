@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import localforage from "localforage";
 
 import HomeLogOut from "./pages/HomeLogOut";
 import HomeLogIn from "./pages/HomeLogIn";
@@ -11,11 +12,22 @@ import Settings from "./pages/Settings";
 import Admin from "./pages/Admin.jsx";
 import { getPets } from "./lib/data/pets";
 import { getUsers } from "./lib/data/apiUsers";
+import PetDetails from "./components/MyPets/PetDetails";
+import PetPage from "./pages/PetPage";
 
 function App() {
   const [authUser, setAuthUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [pets, setPets] = useState([]);
+
+  async function getAuthUser() {
+    try {
+      const user = await localforage.getItem("authUser");
+      setAuthUser(user);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   useEffect(() => {
     getUsers().then((users) => {
@@ -24,6 +36,7 @@ function App() {
     getPets().then((pets) => {
       setPets(pets.pets);
     });
+    getAuthUser();
   }, []);
 
   return (
@@ -32,8 +45,13 @@ function App() {
         authUser,
         login: (us) => {
           setAuthUser(us);
+          localforage.setItem("authUser", us);
+          // let test = await localforage.getItem("authUser");
         },
-        logout: () => setAuthUser(null),
+        logout: () => {
+          setAuthUser(null);
+          localforage.removeItem("authUser");
+        },
         update: (usr) => setAuthUser(usr),
       }}
     >
@@ -57,6 +75,9 @@ function App() {
           </Route>
           <Route path="/settings">
             <Settings />
+          </Route>
+          <Route path="/pet/:petId">
+            <PetPage />
           </Route>
           {/* <Route path="/advanced_search">
             <AdvancedSearch />
