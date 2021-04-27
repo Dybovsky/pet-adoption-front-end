@@ -5,6 +5,7 @@ import { AuthContext } from "../components/AuthContext";
 const AddPet = () => {
   const [pic, setPic] = useState(null);
   const authUser = useContext(AuthContext).authUser;
+  const token = authUser.token;
   const [newPet, setNewPet] = useState({
     type: "",
     breed: "",
@@ -21,7 +22,7 @@ const AddPet = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addPet(newPet);
+    addPet(newPet, token);
     setNewPet({
       type: "",
       breed: "",
@@ -29,7 +30,7 @@ const AddPet = () => {
       status: "",
       height: 0,
       weight: 0,
-      picture: "",
+      picture: null,
       color: "",
       bio: "",
       allergy: "",
@@ -45,7 +46,7 @@ const AddPet = () => {
   };
 
   // const updateNewPetPic = (e) => {
-  //   setPic(e.target.files[0]);
+  //   setPic(e.target.files[0].);
   // };
 
   return (
@@ -111,7 +112,7 @@ const AddPet = () => {
           <input
             value={newPet.picture}
             name="picture"
-            type="text"
+            type="file"
             onChange={updateNewPet}
             //onChange={(e) => setPic(e.target.files[0])}
           />

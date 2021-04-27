@@ -5,16 +5,15 @@ const BaseUrl = "http://localhost:5500/pet";
 export async function addPet(pet, token) {
   //const json = JSON.stringify(pet);
   //const response =
-  // console.log(pet);
+
   await axios({
-    method: "put",
+    method: "post",
     url: BaseUrl,
     data: pet,
     headers: {
-      Authorization: `Bearer ` + token,
+      Authorization: `Bearer ${token}`,
     },
   });
-  await axios.post(BaseUrl, pet);
 }
 
 export async function getPets() {
@@ -35,10 +34,10 @@ export async function setPetImage(petId, token, picture) {
     },
   })
     .then(function (response) {
-      console.log(response);
+      //console.log(response);
     })
     .catch(function (response) {
-      console.log(response);
+      //console.log(response);
     });
 }
 
@@ -60,7 +59,21 @@ export async function getPetById(petId, token) {
       Authorization: `Bearer ` + token,
     },
   });
-  console.log("result", result);
+
   return result;
   // .data.response[0];
+}
+
+//edit pet
+
+export async function editPet(petId, editedPet) {
+  const res = await axios({
+    method: "put",
+    url: `${BaseUrl}/${petId}/`,
+    data: editedPet,
+    // headers: {
+    //   Authorization: `Bearer ` + token,
+    // },
+  });
+  return res;
 }
