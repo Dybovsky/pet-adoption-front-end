@@ -11,7 +11,7 @@ import MyPetsPage from "./pages/MyPetsPage";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin.jsx";
 import { getPets } from "./lib/data/pets";
-import { getUsers } from "./lib/data/apiUsers";
+import { getUsers, editUser } from "./lib/data/apiUsers";
 import PetDetails from "./components/MyPets/PetDetails";
 import PetPage from "./pages/PetPage";
 
@@ -52,7 +52,10 @@ function App() {
           setAuthUser(null);
           localforage.removeItem("authUser");
         },
-        update: (usr) => setAuthUser(usr),
+        update: (usr) => {
+          setAuthUser(usr);
+          editUser(authUser, usr);
+        },
       }}
     >
       <Router>

@@ -6,25 +6,8 @@ import { AuthContext } from "../components/AuthContext";
 const PetPage = () => {
   const token = useContext(AuthContext).authUser.token;
   const { petId } = useParams();
-  let [pet, setPet] = useState(null);
-  //   let cat = await getPetById(petId, token);
-  //   console.log(cat);
-  useEffect(() => {
-    getPetById(petId, token).then((resp) => setPet(resp.data.response[0]));
-  }, []);
 
-  const [editedPet, setEditedPet] = useState({
-    //   type: pet.type,
-    //   breed: pet.breed,
-    //   name: pet.name,
-    //   status: pet.status,
-    //   height: pet.height,
-    //   weight: pet.weight,
-    //   picture: pet.picture,
-    //   color: pet.color,
-    //   bio: pet.bio,
-    //   allergy: pet.allergy,
-    //   diet: pet.diet,
+  let [editedPet, setEditedPet] = useState({
     type: "",
     breed: "",
     name: "",
@@ -37,16 +20,26 @@ const PetPage = () => {
     allergy: "",
     diet: "",
   });
-  if (!pet) {
-    return <div>no pet</div>;
-  }
+  //   let cat = await getPetById(petId, token);
+  // console.log(cat);
+  //
 
+  useEffect(() => {
+    getPetById(petId, token).then((resp) => {
+      setEditedPet(resp.data.response[0]);
+      console.log("pet edi", resp.data.response[0]);
+    });
+  }, [petId, token]);
+
+  // if (!pet) {
+  //   return <div>no pet</div>;
+  // }
   //   const authUser = useContext(AuthContext).authUser;
   //   const token = authUser.token;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    editPet(editedPet);
+    editPet(petId, editedPet, token);
     // addPet(newPet, token);
     // setNewPet({
     //   type: "",
@@ -174,7 +167,7 @@ const PetPage = () => {
             onChange={updateEditedPet}
           />
         </label>
-        <button>Add</button>
+        <button>Edit</button>
       </form>
       {/* <div>
         <img src={pet.picture} alt="cat" />

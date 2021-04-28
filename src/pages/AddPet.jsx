@@ -1,12 +1,16 @@
 import { useState, useContext } from "react";
 import { addPet, setPetImage } from "../lib/data/pets";
 import { AuthContext } from "../components/AuthContext";
+import { v4 as uuidv4 } from "uuid";
 
 const AddPet = () => {
   const [pic, setPic] = useState(null);
+
   const authUser = useContext(AuthContext).authUser;
+
   const token = authUser.token;
   const [newPet, setNewPet] = useState({
+    id: "",
     type: "",
     breed: "",
     name: "",
@@ -20,24 +24,49 @@ const AddPet = () => {
     diet: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addPet(newPet, token);
+    const fd = new FormData();
+    fd.append("image", pic);
+
     setNewPet({
+      id: uuidv4(),
       type: "",
       breed: "",
       name: "",
       status: "",
       height: 0,
       weight: 0,
-      picture: null,
+      picture: "",
       color: "",
       bio: "",
       allergy: "",
       diet: "",
     });
-    // setPetImage(, );
+
+    await addPet(newPet, token);
+    await setPetImage(newPet.id, token, fd);
+    // setNewPet((pet) => ({ ...pet, picture: urlPath }));
+    // fd.append("", newPet);
+    // let urlPath = "pic";
+    // // = await setPetImage(newPet.id, token, fd).picture;
+    // setNewPet((pet) => ({ ...pet, picture: urlPath }));
+    // console.log("newPet", newPet);
+    // //await console.log("url", urlPath);
+    // await addPet(newPet, token);
   };
+
+  // const onAdd = async (e) => {
+  //   e.preventDefault();
+  //   const fd = new FormData();
+  //   fd.append("image", image); // picture
+  //   for (let data in inputs) { // the rest of the data
+  //     fd.append(data, inputs[data]);
+  //   }
+  //   const result = await axios.post(baseURL + "/pets/addPet", fd);
+  //   console.log(await result.data);
+  // };
+
   const updateNewPet = (e) => {
     setNewPet({
       ...newPet,
@@ -108,16 +137,6 @@ const AddPet = () => {
           />
         </label>
         <label className="form-row">
-          Picture:
-          <input
-            value={newPet.picture}
-            name="picture"
-            type="file"
-            onChange={updateNewPet}
-            //onChange={(e) => setPic(e.target.files[0])}
-          />
-        </label>
-        <label className="form-row">
           Color:
           <input
             value={newPet.color}
@@ -153,8 +172,18 @@ const AddPet = () => {
             onChange={updateNewPet}
           />
         </label>
+        <label className="form-row">
+          Picture:
+          <input
+            name="picture"
+            type="file"
+            //onChange={updateNewPet}
+            onChange={(e) => setPic(e.target.files[0])}
+          />
+        </label>
         <button>Add</button>
       </form>
+      <form></form>
     </div>
   );
 };

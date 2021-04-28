@@ -80,3 +80,8 @@ code {
 .settings {
   width: 40%;
 }
+
+.catImg {
+  width: 100px;
+  height: 100px;
+}

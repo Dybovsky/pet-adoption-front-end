@@ -22,3 +22,25 @@ export async function getUserByEmail(email) {
   const response = await axios.get(`${BaseUrl}/${email}`);
   return response.data.user;
 }
+
+export async function deleteUser(userId, token) {
+  await axios({
+    method: "delete",
+    url: `${BaseUrl}/${userId}/`,
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
+}
+
+export async function editUser(authUser, editedUser) {
+  console.log("userrrID", authUser);
+  await axios({
+    method: "put",
+    url: `${BaseUrl}/${authUser.id}/`,
+    data: { editedUser },
+    headers: {
+      Authorization: `Bearer ` + authUser.token,
+    },
+  });
+}

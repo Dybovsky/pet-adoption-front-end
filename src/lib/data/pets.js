@@ -22,23 +22,27 @@ export async function getPets() {
 }
 
 export async function setPetImage(petId, token, picture) {
-  const formData = new FormData();
-  formData.append("image", picture);
+  // const formData = new FormData();
+  // formData.append("image", picture);
+
   const result = await axios({
     method: "put",
-    url: `${BaseUrl}/${petId}/picture`,
-    data: formData,
+    url: `${BaseUrl}/picture/${petId}`,
+    data: picture,
     headers: {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ` + token,
     },
-  })
-    .then(function (response) {
-      //console.log(response);
-    })
-    .catch(function (response) {
-      //console.log(response);
-    });
+  });
+  return result.data;
+
+  // console.log("setimg starts", picture);
+  // .then(function (response) {
+  //   //console.log(response);
+  // })
+  // .catch(function (response) {
+  //   //console.log(response);
+  // });
 }
 
 export async function deletePet(petId, token) {
@@ -66,14 +70,15 @@ export async function getPetById(petId, token) {
 
 //edit pet
 
-export async function editPet(petId, editedPet) {
+export async function editPet(petId, editedPet, token) {
+  console.log(petId, "PETID");
   const res = await axios({
     method: "put",
     url: `${BaseUrl}/${petId}/`,
-    data: editedPet,
-    // headers: {
-    //   Authorization: `Bearer ` + token,
-    // },
+    data: { editedPet },
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
   });
   return res;
 }
