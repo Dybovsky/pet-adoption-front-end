@@ -39,6 +39,8 @@ function App() {
     getAuthUser();
   }, []);
 
+  console.log(authUser);
+
   return (
     <AuthContext.Provider
       value={{

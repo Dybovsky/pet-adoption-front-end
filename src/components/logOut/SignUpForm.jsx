@@ -18,10 +18,11 @@ const SignUpForm = (props) => {
     password: "",
   });
 
-  const submitSignUp = (e) => {
+  const submitSignUp = async (e) => {
     e.preventDefault();
+    let curUser = await getUserByEmail(signUpUser.email);
     // mocUsers.push(signUpUser)
-    user.login(signUpUser);
+    user.login(curUser);
     //const authUser = JSON.stringify(signUpUser)
     createUser(signUpUser);
 

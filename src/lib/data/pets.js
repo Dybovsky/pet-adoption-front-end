@@ -21,6 +21,18 @@ export async function getPets() {
   return result.data;
 }
 
+export async function getPetsByUserId(token) {
+  const result = await axios({
+    method: "get",
+    url: `${BaseUrl}/user/my`,
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
+
+  return result.data.usersPets;
+}
+
 export async function setPetImage(petId, token, picture) {
   // const formData = new FormData();
   // formData.append("image", picture);
@@ -71,11 +83,22 @@ export async function getPetById(petId, token) {
 //edit pet
 
 export async function editPet(petId, editedPet, token) {
-  console.log(petId, "PETID");
   const res = await axios({
     method: "put",
     url: `${BaseUrl}/${petId}/`,
     data: { editedPet },
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
+  return res;
+}
+
+export async function takePet(petId, token) {
+  const res = axios({
+    method: "post",
+    url: `${BaseUrl}/${petId}/adopt`,
+    // data: { editedPet },
     headers: {
       Authorization: `Bearer ` + token,
     },

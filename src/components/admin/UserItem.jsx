@@ -4,7 +4,7 @@ import { deleteUser } from "../../lib/data/apiUsers";
 
 const UserItem = ({ user }) => {
   const token = useContext(AuthContext).authUser.token;
-  console.log("tk", token);
+
   return (
     <div>
       <div>User id: {user.id}</div>
