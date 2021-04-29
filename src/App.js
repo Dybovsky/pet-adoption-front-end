@@ -17,8 +17,8 @@ import PetPage from "./pages/PetPage";
 
 function App() {
   const [authUser, setAuthUser] = useState(null);
-  const [users, setUsers] = useState([]);
-  const [pets, setPets] = useState([]);
+  // const [users, setUsers] = useState([]);
+  // const [pets, setPets] = useState([]);
 
   async function getAuthUser() {
     try {
@@ -30,14 +30,18 @@ function App() {
   }
 
   useEffect(() => {
-    getUsers().then((users) => {
-      setUsers(users);
-    });
-    getPets().then((pets) => {
-      setPets(pets.pets);
-    });
     getAuthUser();
   }, []);
+
+  // useEffect(() => {
+  //   getUsers().then((users) => {
+  //     setUsers(users);
+  //   });
+  //   getPets().then((pets) => {
+  //     setPets(pets.pets);
+  //   });
+  //   getAuthUser();
+  // }, []);
 
   // console.log(pets);
 
@@ -66,14 +70,12 @@ function App() {
           <Route exact path="/">
             <div className="main">
               {!authUser && <HomeLogOut />}
-              {authUser && authUser.role === "admin" && (
-                <Admin users={users} pets={pets} />
-              )}
+              {authUser && authUser.role === "admin" && <Admin />}
               {authUser && <HomeLogIn />}
             </div>
           </Route>
           <Route path="/search">
-            <Search pets={pets} />
+            <Search />
           </Route>
           <Route path="/myPets">
             <MyPetsPage />

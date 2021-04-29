@@ -25,20 +25,28 @@ const MyPetsPage = () => {
   //   setMyPets(pets);
   //   console.log(myPets);
   // }, [isChecked, myPets]);
-  useEffect(() => {
+
+  const refreshPets = () => {
     getPetsByUserId(token).then((pets) => {
-      console.log("pets", pets);
       setMyPets(pets);
     });
-  }, [token]);
+    console.log("refreshes in Mypets");
+  };
+
+  useEffect(() => {
+    // getPetsByUserId(token).then((pets) => {
+    //   setMyPets(pets);
+    // });
+    refreshPets();
+  }, []);
   //console.log(myPets);
-  console.log(token);
+  // console.log(token);
   return (
     <div>
       {/* <Toggle onToggle={onToggle} /> */}
       {/* {!myPets && <h2>You dont have any fat cats</h2>} */}
       {myPets ? (
-        <PetsList pets={myPets} />
+        <PetsList pets={myPets} refreshPets={refreshPets} />
       ) : (
         <h2>You dont have any fat cats</h2>
       )}

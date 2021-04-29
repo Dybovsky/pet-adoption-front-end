@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PetsList from "../components/MyPets/PetsList";
 import ToAdvancedSearchBtn from "../components/Search/ToAdvancedSearchBtn";
+import { getPets } from "../lib/data/pets";
 
-const Search = ({ pets }) => {
+const Search = () => {
+  const [pets, setPets] = useState([]);
+
+  useEffect(() => {
+    refreshPets();
+  }, []);
+
+  const refreshPets = () => {
+    getPets().then((pets) => {
+      setPets(pets.pets);
+    });
+    console.log("refreshes in Search");
+  };
+
   const [searchField, setSearchField] = useState("");
 
   const handleInput = (e) => {
@@ -17,7 +31,7 @@ const Search = ({ pets }) => {
       </label>
       <button>Search</button>
       <ToAdvancedSearchBtn />
-      <PetsList pets={pets} />
+      <PetsList pets={pets} refreshPets={refreshPets} />
     </div>
   );
 };

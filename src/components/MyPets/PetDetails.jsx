@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { deletePet, returnPet, takePet } from "../../lib/data/pets";
 import { Link } from "react-router-dom";
 
-const PetDetails = ({ pet }) => {
+const PetDetails = ({ pet, refreshPets, closeModal }) => {
   let authUser = useContext(AuthContext).authUser;
   let token = useContext(AuthContext).authUser.token;
 
@@ -16,8 +16,8 @@ const PetDetails = ({ pet }) => {
   // let isFoster = pet.status === "foster";
   let isAdmin = authUser.role === "admin";
   let isAvailable = !pet.Owner_Id;
-  let isMyPet = (pet.Owner_Id = authUser.id);
-  console.log(pet.Owner_Id);
+  let isMyPet = pet.Owner_Id === authUser.id;
+  console.log("owner", pet.Owner_Id);
 
   return (
     <div>
@@ -39,14 +39,38 @@ const PetDetails = ({ pet }) => {
         {pet.saved ? "Remove from saves" : "Save"}
       </button> */}
       {isMyPet && (
-        <button onClick={() => returnPet(pet.id, token)}>Return</button>
+        <button
+          onClick={() => {
+            returnPet(pet.id, token);
+            refreshPets();
+            closeModal();
+          }}
+        >
+          Return
+        </button>
       )}
       {isAdmin && (
-        <button onClick={() => deletePet(pet.id, token)}>Delete</button>
+        <button
+          onClick={() => {
+            deletePet(pet.id, token);
+            refreshPets();
+            closeModal();
+          }}
+        >
+          Delete
+        </button>
       )}
       <Link to={`pet/${pet.id}`}>{isAdmin && <button>Edit</button>}</Link>
       {isAvailable && (
-        <button onClick={() => takePet(pet.id, token)}>Adopt</button>
+        <button
+          onClick={() => {
+            takePet(pet.id, token);
+            refreshPets();
+            closeModal();
+          }}
+        >
+          Adopt
+        </button>
       )}
       {/* //foster */}
     </div>

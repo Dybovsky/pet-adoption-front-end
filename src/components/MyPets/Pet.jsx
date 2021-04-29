@@ -6,7 +6,9 @@ const Pet = (props) => {
   const { pet } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div>
       {/* pet.img
@@ -21,7 +23,11 @@ const Pet = (props) => {
 
       <button onClick={() => setIsModalOpen(true)}>See more</button>
       <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
-        <PetDetails pet={pet} />
+        <PetDetails
+          pet={pet}
+          refreshPets={props.refreshPets}
+          closeModal={closeModal}
+        />
       </Modal>
     </div>
   );
