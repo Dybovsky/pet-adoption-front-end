@@ -183,7 +183,6 @@ const AddPet = () => {
         </label>
         <button>Add</button>
       </form>
-      <form></form>
     </div>
   );
 };

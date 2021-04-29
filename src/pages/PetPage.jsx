@@ -26,6 +26,7 @@ const PetPage = () => {
 
   useEffect(() => {
     getPetById(petId, token).then((resp) => {
+      console.log("eee", resp);
       setEditedPet(resp.data.response[0]);
       // console.log("pet edi", resp.data.response[0]);
     });
@@ -40,21 +41,6 @@ const PetPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     editPet(petId, editedPet, token);
-    // addPet(newPet, token);
-    // setNewPet({
-    //   type: "",
-    //   breed: "",
-    //   name: "",
-    //   status: "",
-    //   height: 0,
-    //   weight: 0,
-    //   picture: null,
-    //   color: "",
-    //   bio: "",
-    //   allergy: "",
-    //   diet: "",
-    // });
-    // setPetImage(, );
   };
   const updateEditedPet = (e) => {
     setEditedPet({
@@ -124,7 +110,7 @@ const PetPage = () => {
         <label className="form-row">
           Picture:
           <input
-            value={editedPet.picture}
+            //value={editedPet.picture}
             name="picture"
             type="file"
             onChange={updateEditedPet}

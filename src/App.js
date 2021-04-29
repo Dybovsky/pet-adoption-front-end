@@ -39,7 +39,7 @@ function App() {
     getAuthUser();
   }, []);
 
-  console.log(authUser);
+  // console.log(pets);
 
   return (
     <AuthContext.Provider

@@ -85,3 +85,9 @@ code {
   width: 300px;
   /* height: 200px; */
 }
+
+.btn-primary {
+  color: #fff;
+  background-color: #31211d;
+  border-color: #31211d;
+}

@@ -37,9 +37,13 @@ const MyPetsPage = () => {
     <div>
       {/* <Toggle onToggle={onToggle} /> */}
       {/* {!myPets && <h2>You dont have any fat cats</h2>} */}
-      {myPets && <PetsList pets={myPets} />}
-      {/* {!saved && <h2>You dont have any fat cats</h2>}
-      {saved && <PetsList myPets={saved} />} */}
+      {myPets ? (
+        <PetsList pets={myPets} />
+      ) : (
+        <h2>You dont have any fat cats</h2>
+      )}
+      {myPets && myPets.length < 1 && <h2>You dont have any fat cats</h2>}
+      {/* {saved && <PetsList myPets={saved} />}  */}
     </div>
   );
 };
