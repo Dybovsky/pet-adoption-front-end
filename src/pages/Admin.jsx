@@ -8,18 +8,23 @@ const Admin = () => {
   const [users, setUsers] = useState([]);
   const [pets, setPets] = useState([]);
 
+  const refreshPets = () => {
+    getPets().then((pets) => {
+      setPets(pets.pets);
+    });
+    console.log("refreshes in Admin");
+  };
+
   useEffect(() => {
     getUsers().then((users) => {
       setUsers(users);
     });
-    getPets().then((pets) => {
-      setPets(pets.pets);
-    });
+    refreshPets();
   }, []);
   return (
     <div>
       <AddPetBtn />
-      <ToDashboardBtn users={users} pets={pets} />
+      <ToDashboardBtn users={users} pets={pets} refreshPets={refreshPets} />
     </div>
   );
 };

@@ -17,7 +17,13 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
   let isAdmin = authUser.role === "admin";
   let isAvailable = !pet.Owner_Id;
   let isMyPet = pet.Owner_Id === authUser.id;
-  console.log("owner", pet.Owner_Id);
+  let isFostered = pet.status === "fostered";
+
+  let status = isFostered ? "adopted" : "fostered";
+  console.log("stat", status);
+  console.log("ismy", isMyPet);
+  console.log("isfoste", isFostered);
+  console.log("ava", isAvailable);
 
   return (
     <div>
@@ -42,7 +48,7 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
         <button
           onClick={() => {
             returnPet(pet.id, token);
-            refreshPets();
+            refreshPets(token);
             closeModal();
           }}
         >
@@ -53,7 +59,7 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
         <button
           onClick={() => {
             deletePet(pet.id, token);
-            refreshPets();
+            refreshPets(token);
             closeModal();
           }}
         >
@@ -61,18 +67,17 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
         </button>
       )}
       <Link to={`pet/${pet.id}`}>{isAdmin && <button>Edit</button>}</Link>
-      {isAvailable && (
+      {(isAvailable || isFostered) && (
         <button
           onClick={() => {
-            takePet(pet.id, token);
-            refreshPets();
+            takePet(pet.id, token, status);
+            refreshPets(token);
             closeModal();
           }}
         >
-          Adopt
+          {isFostered ? "Adopt" : "Foster"}
         </button>
       )}
-      {/* //foster */}
     </div>
   );
 };

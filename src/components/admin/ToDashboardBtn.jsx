@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Collapse } from "react-bootstrap";
 import Dashboard from "../../pages/Dashboard";
 
-const ToDashboardBtn = ({ users, pets }) => {
+const ToDashboardBtn = ({ users, pets, refreshPets }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -16,7 +16,7 @@ const ToDashboardBtn = ({ users, pets }) => {
       </Button>
       <Collapse in={open}>
         <div id="example-collapse-text">
-          <Dashboard users={users} pets={pets} />
+          <Dashboard users={users} pets={pets} refreshPets={refreshPets} />
         </div>
       </Collapse>
     </>

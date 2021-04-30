@@ -22,7 +22,11 @@ const Pet = (props) => {
       <div>{pet.status}</div>
 
       <button onClick={() => setIsModalOpen(true)}>See more</button>
-      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
+      <Modal
+        ariaHideApp={false}
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
         <PetDetails
           pet={pet}
           refreshPets={props.refreshPets}

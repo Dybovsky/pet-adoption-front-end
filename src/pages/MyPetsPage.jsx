@@ -3,16 +3,30 @@ import PetsList from "../components/MyPets/PetsList";
 import Toggle from "../components/MyPets/Toggle";
 import { getPetsByUserId } from "../lib/data/pets";
 import { AuthContext } from "../components/AuthContext";
+import localforage from "localforage";
 
 const MyPetsPage = () => {
   const [saved, setSaved] = useState();
   //const [isChecked, setIsChecked] = useState(false);
-
+  const [authUser, setAuthUser] = useState(null);
   const [myPets, setMyPets] = useState(null);
 
-  const authUser = useContext(AuthContext).authUser;
+  // useContext(AuthContext).authUser.then((user) => {
+  //   let token = user.token;
+  // });
+  // const authUser = await localforage.getItem("authUser");
 
-  const token = authUser.token;
+  async function getAuthUser() {
+    try {
+      const user = await localforage.getItem("authUser");
+      setAuthUser(user);
+      return user;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // const token = authUser.token;
 
   // const onToggle = (val) => {
   //   setIsChecked(val);
@@ -26,19 +40,23 @@ const MyPetsPage = () => {
   //   console.log(myPets);
   // }, [isChecked, myPets]);
 
-  const refreshPets = () => {
+  function refreshPets(token) {
     getPetsByUserId(token).then((pets) => {
       setMyPets(pets);
+      console.log("pets", pets);
     });
     console.log("refreshes in Mypets");
-  };
-
+  }
   useEffect(() => {
     // getPetsByUserId(token).then((pets) => {
     //   setMyPets(pets);
     // });
-    refreshPets();
+    getAuthUser().then((user) => {
+      console.log("token", user.token);
+      refreshPets(user.token);
+    });
   }, []);
+
   //console.log(myPets);
   // console.log(token);
   return (

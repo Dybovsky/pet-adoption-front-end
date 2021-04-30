@@ -4,7 +4,7 @@ import UsersList from "../components/admin/UsersList";
 import PetsList from "../components/MyPets/PetsList";
 // import { getPets } from "../lib/data/pets";
 
-const Dashboard = ({ users, pets }) => {
+const Dashboard = ({ users, pets, refreshPets }) => {
   // const [users, setUsers] = useState([]);
   // const [pets, setPets] = useState([]);
 
@@ -22,7 +22,7 @@ const Dashboard = ({ users, pets }) => {
       Users
       <UsersList users={users} />
       Pets
-      <PetsList pets={pets} />
+      <PetsList pets={pets} refreshPets={refreshPets} />
     </div>
   );
 };

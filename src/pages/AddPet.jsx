@@ -28,24 +28,28 @@ const AddPet = () => {
     e.preventDefault();
     const fd = new FormData();
     fd.append("image", pic);
+    const id = uuidv4();
+
+    const { picture } = await setPetImage(id, token, fd);
 
     setNewPet({
-      id: uuidv4(),
+      id,
       type: "",
       breed: "",
       name: "",
       status: "",
       height: 0,
       weight: 0,
-      picture: "",
+      picture,
       color: "",
       bio: "",
       allergy: "",
       diet: "",
     });
-
+    newPet.id = id;
+    newPet.picture = picture;
+    console.log("newPet", newPet);
     await addPet(newPet, token);
-    await setPetImage(newPet.id, token, fd);
     // setNewPet((pet) => ({ ...pet, picture: urlPath }));
     // fd.append("", newPet);
     // let urlPath = "pic";

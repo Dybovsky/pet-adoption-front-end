@@ -37,13 +37,20 @@ export async function setPetImage(petId, token, picture) {
   // const formData = new FormData();
   // formData.append("image", picture);
   console.log(petId);
-  const result = await axios({
-    method: "put",
-    url: `${BaseUrl}/picture/${petId}`,
-    data: { picture },
+  // const result = await axios({
+  //   method: "put",
+  //   url: `${BaseUrl}/picture/${petId}`,
+  //   data: { picture },
+  // headers: {
+  //   Authorization: `Bearer ` + token,
+  //   "Content-Type": "multipart/form-data",
+  // },
+  // });
+
+  const result = await axios.put(`${BaseUrl}/picture/${petId}`, picture, {
     headers: {
-      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ` + token,
+      "Content-Type": "multipart/form-data",
     },
   });
   return result.data;
@@ -94,10 +101,10 @@ export async function editPet(petId, editedPet, token) {
   return res;
 }
 
-export async function takePet(petId, token) {
+export async function takePet(petId, token, status) {
   const res = axios({
     method: "post",
-    url: `${BaseUrl}/${petId}/adopt`,
+    url: `${BaseUrl}/take_pet/${petId}/${status}`,
     // data: { editedPet },
     headers: {
       Authorization: `Bearer ` + token,
@@ -109,7 +116,7 @@ export async function takePet(petId, token) {
 export async function returnPet(petId, token) {
   const res = axios({
     method: "post",
-    url: `${BaseUrl}/${petId}/return`,
+    url: `${BaseUrl}/return/${petId}`,
     // data: { editedPet },
     headers: {
       Authorization: `Bearer ` + token,

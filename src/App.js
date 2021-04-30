@@ -52,6 +52,7 @@ function App() {
         login: (us) => {
           setAuthUser(us);
           localforage.setItem("authUser", us);
+
           // let test = await localforage.getItem("authUser");
         },
         logout: () => {
