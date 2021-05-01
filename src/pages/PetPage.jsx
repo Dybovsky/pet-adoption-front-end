@@ -153,7 +153,7 @@ const PetPage = () => {
             onChange={updateEditedPet}
           />
         </label>
-        <button>Edit</button>
+        <button className="btn-primary">Edit</button>
       </form>
       {/* <div>
         <img src={pet.picture} alt="cat" />

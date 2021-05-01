@@ -15,16 +15,26 @@ const Admin = () => {
     console.log("refreshes in Admin");
   };
 
-  useEffect(() => {
+  const refreshUsers = () => {
     getUsers().then((users) => {
       setUsers(users);
     });
+    console.log("refreshes in Admin");
+  };
+
+  useEffect(() => {
+    refreshUsers();
     refreshPets();
   }, []);
   return (
     <div>
       <AddPetBtn />
-      <ToDashboardBtn users={users} pets={pets} refreshPets={refreshPets} />
+      <ToDashboardBtn
+        users={users}
+        pets={pets}
+        refreshPets={refreshPets}
+        refreshUsers={refreshUsers}
+      />
     </div>
   );
 };

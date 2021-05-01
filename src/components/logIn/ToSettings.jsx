@@ -1,12 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const ToSettings = () => {
+  return (
+    <Link to="/settings">
+      <button className="btn-primary">Settings</button>
+    </Link>
+  );
+};
 
-    return(
-        <Link to='/settings'>
-            <button>Settings</button>
-        </Link>
-    )
-}
-
-export default ToSettings
+export default ToSettings;

@@ -26,11 +26,11 @@ const Search = () => {
   };
 
   return (
-    <div>
+    <div className="search-back">
       <label htmlFor="search">
         <input type="search" onChange={handleInput} />
       </label>
-      <button>Search</button>
+      <button className="btn-primary">Search</button>
       <ToAdvancedSearchBtn />
       <PetsList pets={pets} refreshPets={refreshPets} />
     </div>

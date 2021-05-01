@@ -59,7 +59,7 @@ const SignUpForm = (props) => {
   };
 
   return (
-    <div>
+    <div className="">
       <div className="SignUp">
         <h3>SignUp</h3>
         <form onSubmit={submitSignUp}>
@@ -117,7 +117,7 @@ const SignUpForm = (props) => {
               onChange={updateSignUp}
             />
           </label>
-          <button>Sign Up</button>
+          <button className="btn-primary">Sign Up</button>
         </form>
       </div>
       <div className="LogIn">
@@ -141,7 +141,7 @@ const SignUpForm = (props) => {
               onChange={updateLogIn}
             />
           </label>
-          <button>Log In</button>
+          <button className="btn-primary">Log In</button>
         </form>
       </div>
     </div>

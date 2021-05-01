@@ -1,10 +1,10 @@
 import UserItem from "./UserItem";
 
-const UserList = ({ users }) => {
+const UserList = ({ users, refreshUsers }) => {
   return (
-    <div>
+    <div className="users-list">
       {users.map((user) => (
-        <UserItem key={user.id} user={user} />
+        <UserItem key={user.id} user={user} refreshUsers={refreshUsers} />
       ))}
     </div>
   );

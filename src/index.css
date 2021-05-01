@@ -3,6 +3,7 @@
 }
 
 body {
+  background-color: #60b0f4;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -24,10 +25,11 @@ code {
   height: 100vh;
   background-color: #bfc7d9;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .headerTxt {
-  background-color: #f2b56b;
+  background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.35), transparent);
 }
 
 .navigation {
@@ -35,6 +37,7 @@ code {
   height: 8rem;
   margin-bottom: -21px;
   display: flex;
+  justify-content: space-between;
 }
 
 .headerIn {
@@ -66,7 +69,7 @@ code {
 }
 
 .form-row {
-  background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.35), transparent);
+  /* background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.35), transparent); */
   color: aliceblue;
   display: flex;
   justify-content: space-between;
@@ -83,11 +86,84 @@ code {
 
 .catImg {
   width: 300px;
+  border-radius: 15px;
   /* height: 200px; */
 }
 
 .btn-primary {
+  padding: 5px 3px;
+  margin: 5px;
   color: #fff;
   background-color: #31211d;
   border-color: #31211d;
+  border-radius: 10px;
+  transition: all 500ms ease;
+  /* transition: width 2s; */
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  /* background: rgba(0, 0, 0, 0);
+  color: #3a7999;
+  box-shadow: inset 0 0 0 3px #3a7999; */
+
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+  background-color: white;
+  color: #31211d;
+
+  border-color: black;
+}
+
+.pets-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #60b0f4;
+}
+
+.pet-card {
+  justify-items: center;
+  border: 1px solid whitesmoke;
+  border-radius: 15px;
+  padding: 15px;
+  margin-top: 25px;
+  display: grid;
+  align-items: flex-end;
+  background-color: whitesmoke;
+
+  box-shadow: 0px 5px 17px 15px rgba(34, 60, 80, 0.2);
+}
+
+.search-back {
+  background-color: #60b0f4;
+}
+
+.back-linear {
+  border-radius: 5px;
+  padding: 5px;
+  background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.35), transparent);
+}
+
+h3 {
+  color: azure;
+}
+
+.users-list {
+  color: aliceblue;
+  display: flex;
+  overflow: auto;
+
+  justify-content: center;
+}
+
+.user-card {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid rgb(15, 0, 0);
+}
+
+input {
+  border-radius: 15px;
 }

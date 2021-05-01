@@ -7,7 +7,7 @@ const HeaderAuth = () => {
   return (
     <header>
       <h3 className="headerTxt">
-        {`Glad to see you again Mr.${user.firstName}`}
+        {user && `Glad to see you again Mr.${user.firstName}`}
       </h3>
     </header>
   );

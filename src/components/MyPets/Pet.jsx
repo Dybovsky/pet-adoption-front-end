@@ -9,8 +9,24 @@ const Pet = (props) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "#60b0f4",
+      borderRadius: "15px",
+      display: "flex",
+      justifyContent: "center",
+    },
+  };
+
   return (
-    <div>
+    <div className="pet-card">
       {/* pet.img
             pet.name
             pet.status
@@ -18,11 +34,16 @@ const Pet = (props) => {
       <div onClick={() => setIsModalOpen(true)}>
         <img src={pet.picture} alt="cat" className="catImg" />
       </div>
-      <div>{pet.name}</div>
-      <div>{pet.status}</div>
+      <div>
+        <div>{pet.name}</div>
+        <div>{pet.status}</div>
+      </div>
 
-      <button onClick={() => setIsModalOpen(true)}>See more</button>
+      <button className="btn-primary" onClick={() => setIsModalOpen(true)}>
+        See more
+      </button>
       <Modal
+        style={customStyles}
         ariaHideApp={false}
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}

@@ -5,7 +5,7 @@ const PetsList = (props) => {
 
   return (
     <div>
-      <ul>
+      <ul className="pets-list">
         {pets.map((pet) => (
           <Pet pet={pet} key={pet.id} refreshPets={props.refreshPets} />
         ))}

@@ -69,7 +69,7 @@ const AdvancedSearch = () => {
             onChange={updateSearch}
           />
         </label>
-        <button>Search</button>
+        <button className="btn-primary">Search</button>
       </form>
     </div>
   );

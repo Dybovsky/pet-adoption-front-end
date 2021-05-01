@@ -83,7 +83,7 @@ const AddPet = () => {
   // };
 
   return (
-    <div>
+    <div className="back-linear">
       <h3>Add Pet</h3>
       <form onSubmit={handleSubmit}>
         <label className="form-row">
@@ -185,7 +185,7 @@ const AddPet = () => {
             onChange={(e) => setPic(e.target.files[0])}
           />
         </label>
-        <button>Add</button>
+        <button className="btn-primary">Add</button>
       </form>
     </div>
   );

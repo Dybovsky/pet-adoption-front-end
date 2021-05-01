@@ -1,15 +1,13 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const ToMyPetsPage = () => {
+  return (
+    <div>
+      <Link to="/myPets">
+        <button className="btn-primary">Go to my pets</button>
+      </Link>
+    </div>
+  );
+};
 
-    return(
-        <div>
-            <Link to="/myPets">
-                <button>Go to my pets</button>
-            </Link>
-           
-        </div>
-    )
-}
-
-export default ToMyPetsPage
+export default ToMyPetsPage;
