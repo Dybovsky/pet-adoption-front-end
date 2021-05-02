@@ -1,6 +1,6 @@
 import ToDashboardBtn from "../components/admin/ToDashboardBtn";
 import AddPetBtn from "../components/admin/AddPetBtn";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import { getUsers } from "../lib/data/apiUsers";
 import { getPets } from "../lib/data/pets";
 
@@ -8,10 +8,13 @@ const Admin = () => {
   const [users, setUsers] = useState([]);
   const [pets, setPets] = useState([]);
 
-  const refreshPets = () => {
-    getPets().then((pets) => {
+  // const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+
+  const refreshPets = async () => {
+    await getPets().then((pets) => {
       setPets(pets.pets);
     });
+    // forceUpdate();
     console.log("refreshes in Admin");
   };
 
@@ -24,7 +27,7 @@ const Admin = () => {
 
   useEffect(() => {
     refreshUsers();
-    refreshPets();
+    (async () => await refreshPets())();
   }, []);
   return (
     <div>

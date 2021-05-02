@@ -41,6 +41,7 @@ const MyPetsPage = () => {
   // }, [isChecked, myPets]);
 
   function refreshPets(token) {
+    console.log("tk", token);
     getPetsByUserId(token).then((pets) => {
       setMyPets(pets);
       console.log("pets", pets);

@@ -1,6 +1,7 @@
 import Modal from "react-modal";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import PetDetails from "./PetDetails";
+import { AuthContext } from "../AuthContext";
 
 const Pet = (props) => {
   const { pet } = props;
@@ -9,6 +10,8 @@ const Pet = (props) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const token = useContext(AuthContext).authUser.token;
 
   const customStyles = {
     content: {
@@ -31,7 +34,13 @@ const Pet = (props) => {
             pet.name
             pet.status
              */}
-      <div onClick={() => setIsModalOpen(true)}>
+      <div
+        onClick={() => {
+          setIsModalOpen(true);
+          props.refreshPets(token);
+        }}
+        style={{ cursor: "pointer" }}
+      >
         <img src={pet.picture} alt="cat" className="catImg" />
       </div>
       <div>
@@ -39,7 +48,13 @@ const Pet = (props) => {
         <div>{pet.status}</div>
       </div>
 
-      <button className="btn-primary" onClick={() => setIsModalOpen(true)}>
+      <button
+        className="btn-primary"
+        onClick={() => {
+          setIsModalOpen(true);
+          props.refreshPets(token);
+        }}
+      >
         See more
       </button>
       <Modal

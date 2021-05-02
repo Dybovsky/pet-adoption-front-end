@@ -1,19 +1,17 @@
-import React, { useEffect } from "react";
 import { useState } from "react";
 import Switch from "react-switch";
 
-const Toggle = (props) => {
+const ToggleAdd = ({ onToggleAdd }) => {
   const [isChecked, setIsChecked] = useState(false);
-  const { onToggle } = props;
 
   const handleChange = () => {
-    onToggle(!isChecked);
+    onToggleAdd(!isChecked);
     setIsChecked(!isChecked);
   };
 
   return (
     <label>
-      <span>Saved Pets</span>
+      {/* <span>Saved Pets</span> */}
       <Switch
         onChange={handleChange}
         checked={isChecked}
@@ -25,4 +23,4 @@ const Toggle = (props) => {
   );
 };
 
-export default Toggle;
+export default ToggleAdd;

@@ -26,7 +26,13 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
   return (
     <div className="pet-details">
       <div>
-        <img src={pet.picture} alt="cat" className="catImg" />
+        <img
+          src={pet.picture}
+          alt="cat"
+          className="catImg"
+          onClick={() => closeModal()}
+          style={{ cursor: "pointer" }}
+        />
       </div>
       <div>Name: {pet.name}</div>
       <div>Status: {pet.status}</div>
@@ -35,7 +41,7 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
       <div>Weight: {pet.weight}</div>
       <div>Color: {pet.color}</div>
       <div>Bio: {pet.bio}</div>
-      <div>Allergy: {pet.allergy}</div>
+      <div>Allergy: {pet.allergy ? "Yes" : "No"}</div>
       <div>Diet: {pet.diet}</div>
 
       {/* {(isFoster || isAdopted) && <button>Return pet</button>} */}
@@ -44,7 +50,6 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
       </button> */}
       {isMyPet && (
         <button
-          className="btn-primary"
           className="btn-primary"
           onClick={() => {
             returnPet(pet.id, token);
