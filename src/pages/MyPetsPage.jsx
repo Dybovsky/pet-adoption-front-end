@@ -41,19 +41,15 @@ const MyPetsPage = () => {
   // }, [isChecked, myPets]);
 
   function refreshPets(token) {
-    console.log("tk", token);
     getPetsByUserId(token).then((pets) => {
       setMyPets(pets);
-      console.log("pets", pets);
     });
-    console.log("refreshes in Mypets");
   }
   useEffect(() => {
     // getPetsByUserId(token).then((pets) => {
     //   setMyPets(pets);
     // });
     getAuthUser().then((user) => {
-      console.log("token", user.token);
       refreshPets(user.token);
     });
   }, []);

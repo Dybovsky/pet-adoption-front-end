@@ -55,7 +55,6 @@ const AddPet = () => {
     newPet.allergy = isAllergenic;
     newPet.id = id;
     newPet.picture = picture;
-    console.log("newPet", newPet);
 
     await addPet(newPet, token);
   };

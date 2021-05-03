@@ -15,8 +15,6 @@ const Search = () => {
     getPets().then((pets) => {
       setPets(pets.pets);
     });
-    console.log("refreshes in Search");
-    console.log("pets state", pets);
   };
 
   const [searchField, setSearchField] = useState("");

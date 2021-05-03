@@ -20,6 +20,10 @@ const SignUpForm = (props) => {
 
   const submitSignUp = (e) => {
     e.preventDefault();
+    if (signUpUser.password !== signUpUser.passwordCheck) {
+      alert("Check password match!");
+      return;
+    }
     createUser(signUpUser).then((user) => {
       getUserByEmail(user.email).then((fullUser) => {
         fullUser.token = user.token;

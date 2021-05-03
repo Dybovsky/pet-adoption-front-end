@@ -15,14 +15,12 @@ const Admin = () => {
       setPets(pets.pets);
     });
     // forceUpdate();
-    console.log("refreshes in Admin");
   };
 
   const refreshUsers = () => {
     getUsers().then((users) => {
       setUsers(users);
     });
-    console.log("refreshes in Admin");
   };
 
   useEffect(() => {

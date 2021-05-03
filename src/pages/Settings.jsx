@@ -1,5 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../components/AuthContext";
+import { getUserByEmail } from "../lib/data/apiUsers";
 
 const Settings = () => {
   const authUser = useContext(AuthContext);
@@ -24,12 +25,19 @@ const Settings = () => {
     });
   };
 
+  useEffect(() => {
+    console.log("auth11", authUser);
+    getUserByEmail(authUser.authUser.email).then((user) =>
+      setUpdatedUser(user)
+    );
+  }, []);
+
   return (
     <div className="settings back-linear">
       <form onSubmit={saveSettings}>
         <h3>Set your profile</h3>
         <label className="form-row">
-          First name:
+          <span>First name:</span>
           <input
             value={updatedUser.firstName}
             name="firstName"
@@ -38,7 +46,7 @@ const Settings = () => {
           />
         </label>
         <label className="form-row">
-          Last name:
+          <span>Last name:</span>
           <input
             value={updatedUser.lastName}
             name="lastName"
@@ -47,7 +55,7 @@ const Settings = () => {
           />
         </label>
         <label className="form-row">
-          Email:
+          <span>Email: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <input
             value={updatedUser.email}
             name="email"
@@ -56,7 +64,7 @@ const Settings = () => {
           />
         </label>
         <label className="form-row">
-          Phone:
+          <span>Phone: &nbsp;&nbsp;&nbsp;&nbsp;</span>
           <input
             value={updatedUser.phone}
             name="phone"
@@ -65,7 +73,7 @@ const Settings = () => {
           />
         </label>
         <label className="form-row">
-          Password:
+          <span>Password:</span>
           <input
             value={updatedUser.password}
             name="password"
