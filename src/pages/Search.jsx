@@ -20,32 +20,69 @@ const Search = () => {
   };
 
   const [searchField, setSearchField] = useState("");
-  const [searchRes, setSearchRes] = useState(null);
+  // const [searchRes, setSearchRes] = useState(null);
 
   const handleInput = (e) => {
     setSearchField(e.target.value);
   };
 
-  const makeSearch = async (query) => {
-    const result = await getPetsByType(query);
-    setSearchRes(result);
-    // await console.log(searchRes);
+  const filteredPets = pets.filter((pet) => {
+    return pet.type.toLowerCase().includes(searchField.toLowerCase());
+  });
+
+  const itemClickHandler = (e) => {
+    setSearchField(e.target.textContent);
+    setIsOpen(!isOpen);
   };
+
+  const inputClickHandler = () => {
+    setIsOpen(true);
+  };
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  // const makeSearch = async (query) => {
+  //   const result = await getPetsByType(query);
+  //   setSearchRes(result);
+  // };
 
   return (
     <div className="search-back">
-      <label htmlFor="search">
-        <input type="search" onChange={handleInput} placeholder=" Enter type" />
-      </label>
-      <button className="btn-primary" onClick={() => makeSearch(searchField)}>
+      <form>
+        <label htmlFor="search">
+          <input
+            value={searchField}
+            type="search"
+            onChange={handleInput}
+            onClick={inputClickHandler}
+            placeholder=" Enter type"
+          />
+          <ul className="autocomplete">
+            {searchField && isOpen
+              ? filteredPets.map((pet, index) => {
+                  return (
+                    <li
+                      className="autocomplete_item"
+                      onClick={itemClickHandler}
+                    >
+                      {pet.type}
+                    </li>
+                  );
+                })
+              : null}
+          </ul>
+        </label>
+      </form>
+      {/* <button className="btn-primary" onClick={() => makeSearch(searchField)}>
         Search
-      </button>
+      </button> */}
       <ToAdvancedSearchBtn />
-      {!searchRes ? (
+      <PetsList pets={filteredPets} refreshPets={refreshPets} />
+      {/* {!searchRes ? (
         <PetsList pets={pets} refreshPets={refreshPets} />
       ) : (
         <PetsList pets={searchRes} refreshPets={refreshPets} />
-      )}
+      )} */}
     </div>
   );
 };
