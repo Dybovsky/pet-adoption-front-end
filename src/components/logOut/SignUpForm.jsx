@@ -3,7 +3,7 @@ import { AuthContext } from "../AuthContext";
 import { createUser, getUserByEmail, logIn } from "../../lib/data/apiUsers";
 
 const SignUpForm = (props) => {
-  const user = useContext(AuthContext);
+  const userCont = useContext(AuthContext);
   const [signUpUser, setSignUpUser] = useState({
     firstName: "",
     lastName: "",
@@ -18,13 +18,19 @@ const SignUpForm = (props) => {
     password: "",
   });
 
-  const submitSignUp = async (e) => {
+  const submitSignUp = (e) => {
     e.preventDefault();
-    let curUser = await getUserByEmail(signUpUser.email);
-    // mocUsers.push(signUpUser)
-    user.login(curUser);
+    createUser(signUpUser).then((user) => {
+      getUserByEmail(user.email).then((fullUser) => {
+        fullUser.token = user.token;
+        userCont.login(fullUser);
+      });
+    });
+    //let curUser = getUserByEmail(signUpUser.email);
+
+    // curUser.token =  token;
+    //user.login(curUser);
     //const authUser = JSON.stringify(signUpUser)
-    createUser(signUpUser);
 
     //
   };
@@ -36,7 +42,7 @@ const SignUpForm = (props) => {
       let token = authUser.token;
       let curUser = await getUserByEmail(authUser.user.email);
       curUser.token = token;
-      user.login(curUser);
+      userCont.login(curUser);
     } catch (err) {
       console.error(err);
     }
