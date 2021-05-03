@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PetsList from "../components/MyPets/PetsList";
 import ToAdvancedSearchBtn from "../components/Search/ToAdvancedSearchBtn";
-import { getPets } from "../lib/data/pets";
+import { getPets, getPetsByType } from "../lib/data/pets";
 
 const Search = () => {
   const [pets, setPets] = useState([]);
@@ -20,19 +20,32 @@ const Search = () => {
   };
 
   const [searchField, setSearchField] = useState("");
+  const [searchRes, setSearchRes] = useState(null);
 
   const handleInput = (e) => {
     setSearchField(e.target.value);
   };
 
+  const makeSearch = async (query) => {
+    const result = await getPetsByType(query);
+    setSearchRes(result);
+    // await console.log(searchRes);
+  };
+
   return (
     <div className="search-back">
       <label htmlFor="search">
-        <input type="search" onChange={handleInput} />
+        <input type="search" onChange={handleInput} placeholder=" Enter type" />
       </label>
-      <button className="btn-primary">Search</button>
+      <button className="btn-primary" onClick={() => makeSearch(searchField)}>
+        Search
+      </button>
       <ToAdvancedSearchBtn />
-      <PetsList pets={pets} refreshPets={refreshPets} />
+      {!searchRes ? (
+        <PetsList pets={pets} refreshPets={refreshPets} />
+      ) : (
+        <PetsList pets={searchRes} refreshPets={refreshPets} />
+      )}
     </div>
   );
 };

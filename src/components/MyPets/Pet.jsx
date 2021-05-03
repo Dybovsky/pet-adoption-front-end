@@ -10,8 +10,14 @@ const Pet = (props) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+  const user = useContext(AuthContext).authUser;
+  let token;
+  // if (!user) {
+  // } else {
+  //   token = user.authUser.token;
+  // }
 
-  const token = useContext(AuthContext).authUser.token;
+  // const token = useContext(AuthContext).authUser.token;
 
   const customStyles = {
     content: {

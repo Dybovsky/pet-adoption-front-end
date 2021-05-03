@@ -124,3 +124,12 @@ export async function returnPet(petId, token) {
   });
   return res;
 }
+
+export async function getPetsByType(type) {
+  const result = await axios({
+    method: "get",
+    url: `${BaseUrl}/query/type=${type}`,
+  });
+
+  return result.data.response;
+}
