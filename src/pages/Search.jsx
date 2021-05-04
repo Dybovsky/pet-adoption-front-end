@@ -59,9 +59,13 @@ const Search = () => {
     setSearchedAdvPets(searchedPets);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="search-back">
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="search">
           <input
             value={searchField}

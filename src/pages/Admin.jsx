@@ -30,12 +30,14 @@ const Admin = () => {
   return (
     <div>
       <AddPetBtn />
-      <ToDashboardBtn
-        users={users}
-        pets={pets}
-        refreshPets={refreshPets}
-        refreshUsers={refreshUsers}
-      />
+      {users && (
+        <ToDashboardBtn
+          users={users}
+          pets={pets}
+          refreshPets={refreshPets}
+          refreshUsers={refreshUsers}
+        />
+      )}
     </div>
   );
 };

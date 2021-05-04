@@ -7,8 +7,6 @@ const AdvancedSearch = ({ onAdvSearch }) => {
     makeAdvSearch(advancedSearch);
   };
 
-  const [searchedPets, setSearchedPets] = useState(null);
-
   const [advancedSearch, setAdvancedSearch] = useState({
     type: "",
     name: "",
@@ -26,8 +24,8 @@ const AdvancedSearch = ({ onAdvSearch }) => {
   const makeAdvSearch = async (searchObj) => {
     // console.log("search obj", searchObj);
     const result = await getPetsByAdvSearch(searchObj);
-    setSearchedPets(result);
-    await onAdvSearch(searchedPets);
+    // setSearchedPets(result);
+    onAdvSearch(result);
     //works from sec time
   };
 
