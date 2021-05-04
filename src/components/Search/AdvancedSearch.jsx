@@ -1,16 +1,20 @@
 import { useState } from "react";
+import { getPetsByAdvSearch } from "../../lib/data/pets";
 
-const AdvancedSearch = () => {
+const AdvancedSearch = ({ onAdvSearch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
+    makeAdvSearch(advancedSearch);
   };
+
+  const [searchedPets, setSearchedPets] = useState(null);
 
   const [advancedSearch, setAdvancedSearch] = useState({
     type: "",
     name: "",
     status: "",
-    height: "",
-    weight: "",
+    height: 0,
+    weight: 0,
   });
 
   const updateSearch = (e) => {
@@ -18,6 +22,13 @@ const AdvancedSearch = () => {
       ...advancedSearch,
       [e.target.name]: e.target.value,
     });
+  };
+  const makeAdvSearch = async (searchObj) => {
+    // console.log("search obj", searchObj);
+    const result = await getPetsByAdvSearch(searchObj);
+    setSearchedPets(result);
+    await onAdvSearch(searchedPets);
+    //works from sec time
   };
 
   return (
@@ -64,7 +75,7 @@ const AdvancedSearch = () => {
           Weight:
           <input
             value={advancedSearch.weight}
-            name="name"
+            name="weight"
             type="number"
             onChange={updateSearch}
           />

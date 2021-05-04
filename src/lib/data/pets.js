@@ -77,7 +77,7 @@ export async function deletePet(petId, token) {
 export async function getPetById(petId, token) {
   const result = await axios({
     method: "get",
-    url: `${BaseUrl}/${petId}/`,
+    url: `${BaseUrl}/getPet/${petId}/`,
     headers: {
       Authorization: `Bearer ` + token,
     },
@@ -125,11 +125,20 @@ export async function returnPet(petId, token) {
   return res;
 }
 
-export async function getPetsByType(type) {
+// export async function getPetsByType(type) {
+//   const result = await axios({
+//     method: "get",
+//     url: `${BaseUrl}/query/type=${type}`,
+//   });
+
+//   return result.data.response;
+// }
+
+export async function getPetsByAdvSearch(obj) {
   const result = await axios({
     method: "get",
-    url: `${BaseUrl}/query/type=${type}`,
+    url: `${BaseUrl}/query?type=${obj.type}&status=${obj.status}&height=${obj.height}&weight=${obj.weight}&name=${obj.name}`,
   });
-
-  return result.data.response;
+  // console.log("result", result);
+  return result.data;
 }

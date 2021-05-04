@@ -6,6 +6,7 @@ import { getPets, getPetsByType } from "../lib/data/pets";
 
 const Search = () => {
   const [pets, setPets] = useState([]);
+  const [searchedAdvPets, setSearchedAdvPets] = useState(null);
 
   useEffect(() => {
     refreshPets();
@@ -54,6 +55,10 @@ const Search = () => {
   //   setSearchRes(result);
   // };
 
+  const onAdvSearch = (searchedPets) => {
+    setSearchedAdvPets(searchedPets);
+  };
+
   return (
     <div className="search-back">
       <form>
@@ -84,8 +89,12 @@ const Search = () => {
       {/* <button className="btn-primary" onClick={() => makeSearch(searchField)}>
         Search
       </button> */}
-      <ToAdvancedSearchBtn />
-      <PetsList pets={filteredPets} refreshPets={refreshPets} />
+      <ToAdvancedSearchBtn onAdvSearch={onAdvSearch} />
+      {!searchedAdvPets ? (
+        <PetsList pets={filteredPets} refreshPets={refreshPets} />
+      ) : (
+        <PetsList pets={searchedAdvPets} refreshPets={refreshPets} />
+      )}
       {/* {!searchRes ? (
         <PetsList pets={pets} refreshPets={refreshPets} />
       ) : (

@@ -26,7 +26,6 @@ const PetPage = () => {
 
   useEffect(() => {
     getPetById(petId, token).then((resp) => {
-      console.log("eee", resp);
       setEditedPet(resp.data.response[0]);
       // console.log("pet edi", resp.data.response[0]);
     });
