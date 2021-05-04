@@ -34,7 +34,6 @@ export async function deleteUser(userId, token) {
 }
 
 export async function editUser(authUser, editedUser) {
-  console.log("auth", authUser);
   await axios({
     method: "put",
     url: `${BaseUrl}/${authUser.id}/`,

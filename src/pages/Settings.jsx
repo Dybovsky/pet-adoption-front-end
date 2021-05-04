@@ -26,7 +26,6 @@ const Settings = () => {
   };
 
   useEffect(() => {
-    console.log("auth11", authUser);
     getUserByEmail(authUser.authUser.email).then((user) =>
       setUpdatedUser(user)
     );

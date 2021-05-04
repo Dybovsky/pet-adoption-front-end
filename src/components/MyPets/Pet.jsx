@@ -16,7 +16,7 @@ const Pet = (props) => {
   // } else {
   //   token = user.authUser.token;
   // }
-  console.log("auth user", user);
+
   // const token = useContext(AuthContext).authUser.token;
 
   const customStyles = {

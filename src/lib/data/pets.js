@@ -36,7 +36,7 @@ export async function getPetsByUserId(token) {
 export async function setPetImage(petId, token, picture) {
   // const formData = new FormData();
   // formData.append("image", picture);
-  console.log(petId);
+
   // const result = await axios({
   //   method: "put",
   //   url: `${BaseUrl}/picture/${petId}`,

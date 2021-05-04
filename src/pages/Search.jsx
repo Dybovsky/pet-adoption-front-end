@@ -23,7 +23,17 @@ const Search = () => {
   const handleInput = (e) => {
     setSearchField(e.target.value);
   };
+  function unique(arr) {
+    let result = [];
 
+    for (let str of arr) {
+      if (!result.includes(str.type)) {
+        result.push(str.type);
+      }
+    }
+
+    return result;
+  }
   const filteredPets = pets.filter((pet) => {
     return pet.type.toLowerCase().includes(searchField.toLowerCase());
   });
@@ -57,13 +67,13 @@ const Search = () => {
           />
           <ul className="autocomplete">
             {searchField && isOpen
-              ? filteredPets.map((pet, index) => {
+              ? unique(filteredPets).map((pet, index) => {
                   return (
                     <li
                       className="autocomplete_item"
                       onClick={itemClickHandler}
                     >
-                      {pet.type}
+                      {pet}
                     </li>
                   );
                 })
