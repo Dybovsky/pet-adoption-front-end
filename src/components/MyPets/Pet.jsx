@@ -10,8 +10,10 @@ const Pet = (props) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const user = useContext(AuthContext).authUser;
-  let token;
+  // const user = useContext(AuthContext).authUser;
+  // let token;
+
+  //
   // if (!user) {
   // } else {
   //   token = user.authUser.token;
@@ -36,33 +38,31 @@ const Pet = (props) => {
 
   return (
     <div className="pet-card">
-      {/* pet.img
-            pet.name
-            pet.status
-             */}
       <div
+        className="pet-card-inside"
         onClick={() => {
           setIsModalOpen(true);
-          props.refreshPets(token);
+          // props.refreshPets(token);
         }}
         style={{ cursor: "pointer" }}
       >
         <img src={pet.picture} alt="cat" className="catImg" />
-      </div>
-      <div>
-        <div>{pet.name}</div>
-        <div>{pet.status}</div>
-      </div>
+        {/* </div> */}
+        <div>
+          <div>{pet.name}</div>
+          <div>{pet.status}</div>
+        </div>
 
-      <button
-        className="btn-primary"
-        onClick={() => {
-          setIsModalOpen(true);
-          props.refreshPets(token);
-        }}
-      >
-        See more
-      </button>
+        <button
+          className="btn-primary"
+          onClick={() => {
+            setIsModalOpen(true);
+            // props.refreshPets(token);
+          }}
+        >
+          See more
+        </button>
+      </div>
       <Modal
         style={customStyles}
         ariaHideApp={false}

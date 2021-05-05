@@ -15,9 +15,9 @@ const UserItem = ({ user, refreshUsers }) => {
       <div>User date created: {user.dateCreated}</div>
       <button
         className="btn-primary"
-        onClick={() => {
-          deleteUser(user.id, token);
-          refreshUsers();
+        onClick={async () => {
+          await deleteUser(user.id, token);
+          await refreshUsers();
         }}
       >
         Delete

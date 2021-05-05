@@ -18,8 +18,9 @@ const Admin = () => {
   };
 
   const refreshUsers = () => {
-    getUsers().then((users) => {
+    return getUsers().then((users) => {
       setUsers(users);
+      console.log("users", users);
     });
   };
 

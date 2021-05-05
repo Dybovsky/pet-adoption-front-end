@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect } from "react";
 
 const BaseUrl = "http://localhost:5500/pet";
 
@@ -141,4 +142,16 @@ export async function getPetsByAdvSearch(obj) {
   });
   // console.log("result", result);
   return result.data;
+}
+
+export async function savePet(id, petId, token) {
+  const res = axios({
+    method: "post",
+    url: `${BaseUrl}/save/${petId}`,
+    data: { id },
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
+  return res;
 }

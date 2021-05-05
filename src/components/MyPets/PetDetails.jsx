@@ -1,18 +1,27 @@
 import { AuthContext } from "../AuthContext";
-import { useContext } from "react";
-import { deletePet, returnPet, takePet } from "../../lib/data/pets";
+import { useContext, useState } from "react";
+import { deletePet, returnPet, savePet, takePet } from "../../lib/data/pets";
 import { Link } from "react-router-dom";
+import ToggleSave from "./ToogleSave";
+import { v4 as uuidv4 } from "uuid";
 
 const PetDetails = ({ pet, refreshPets, closeModal }) => {
+  const [isSaved, setIsSaved] = useState(false);
+
   let authUser = useContext(AuthContext).authUser;
   if (!authUser)
     return <div>Look but don't touch! Enter your account to continue 🙀</div>;
   let token = authUser.token;
 
-  // const saveCat = () => {
-  //   authUser.savedPets = [];
-  //   authUser.savedPets.push(pet.id);
-  // };
+  const onToggleSave = () => {
+    setIsSaved(!isSaved);
+
+    saveToMyPets();
+  };
+
+  const saveToMyPets = () => {
+    !isSaved && savePet(uuidv4(), pet.id, token);
+  };
 
   // let isAdopted = pet.status === "adopted";
   // let isFoster = pet.status === "foster";
@@ -24,69 +33,74 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
   let status = isFostered ? "adopted" : "fostered";
 
   return (
-    <div className="pet-details">
-      <div>
-        <img
-          src={pet.picture}
-          alt="cat"
-          className="catImg"
-          onClick={() => closeModal()}
-          style={{ cursor: "pointer" }}
-        />
+    <div>
+      <div
+        className="pet-details"
+        onClick={() => closeModal()}
+        style={{ cursor: "pointer" }}
+      >
+        <div
+        // onClick={() => closeModal()}
+        // style={{ cursor: "pointer" }}
+        >
+          <img src={pet.picture} alt="cat" className="catImg" />
+        </div>
+        <div>Name: {pet.name}</div>
+        <div>Status: {pet.status}</div>
+        <div>Type: {pet.type}</div>
+        <div>Height: {pet.height}</div>
+        <div>Weight: {pet.weight}</div>
+        <div>Color: {pet.color}</div>
+        <div>Bio: {pet.bio}</div>
+        <div>Allergy: {pet.allergy ? "Yes" : "No"}</div>
+        <div>Diet: {pet.diet}</div>
       </div>
-      <div>Name: {pet.name}</div>
-      <div>Status: {pet.status}</div>
-      <div>Type: {pet.type}</div>
-      <div>Height: {pet.height}</div>
-      <div>Weight: {pet.weight}</div>
-      <div>Color: {pet.color}</div>
-      <div>Bio: {pet.bio}</div>
-      <div>Allergy: {pet.allergy ? "Yes" : "No"}</div>
-      <div>Diet: {pet.diet}</div>
-
       {/* {(isFoster || isAdopted) && <button>Return pet</button>} */}
       {/* <button onClick={() => saveCat()}>
         {pet.saved ? "Remove from saves" : "Save"}
       </button> */}
-      {isMyPet && (
-        <button
-          className="btn-primary"
-          onClick={() => {
-            returnPet(pet.id, token);
-            refreshPets(token);
-            closeModal();
-          }}
-        >
-          Return
-        </button>
-      )}
-      {isAdmin && (
-        <button
-          className="btn-primary"
-          onClick={() => {
-            deletePet(pet.id, token);
-            refreshPets(token);
-            closeModal();
-          }}
-        >
-          Delete
-        </button>
-      )}
-      <Link to={`pet/${pet.id}`}>
-        {isAdmin && <button className="btn-primary">Edit</button>}
-      </Link>
-      {(isAvailable || isFostered) && (
-        <button
-          className="btn-primary"
-          onClick={() => {
-            takePet(pet.id, token, status);
-            refreshPets(token);
-            closeModal();
-          }}
-        >
-          {isFostered ? "Adopt" : "Foster"}
-        </button>
-      )}
+      <div className="pet-card-btn">
+        {isMyPet && (
+          <button
+            className="btn-primary"
+            onClick={async () => {
+              await returnPet(pet.id, token);
+              await refreshPets(token);
+              //closeModal();
+            }}
+          >
+            Return
+          </button>
+        )}
+        {isAdmin && (
+          <button
+            className="btn-primary"
+            onClick={async () => {
+              await deletePet(pet.id, token);
+              await refreshPets(token);
+              //closeModal();
+            }}
+          >
+            Delete
+          </button>
+        )}
+        <Link to={`pet/${pet.id}`}>
+          {isAdmin && <button className="btn-primary">Edit</button>}
+        </Link>
+        {(isAvailable || isFostered) && (
+          <button
+            className="btn-primary"
+            onClick={async () => {
+              await takePet(pet.id, token, status);
+              await refreshPets(token);
+              //closeModal();
+            }}
+          >
+            {isFostered ? "Adopt" : "Foster"}
+          </button>
+        )}
+        <ToggleSave onToggleSave={onToggleSave}> </ToggleSave>
+      </div>
     </div>
   );
 };
