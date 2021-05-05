@@ -145,10 +145,35 @@ export async function getPetsByAdvSearch(obj) {
 }
 
 export async function savePet(id, petId, token) {
-  const res = axios({
+  const res = await axios({
     method: "post",
     url: `${BaseUrl}/save/${petId}`,
     data: { id },
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
+  console.log("res", res.data.id);
+  return res.data.id;
+}
+
+export async function unsavePet(id, token) {
+  console.log("unsave", id, token);
+  const res = axios({
+    method: "delete",
+    url: `${BaseUrl}/unsave/${id}`,
+    data: { id },
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
+  return res;
+}
+
+export async function getSavedPets(userId, token) {
+  const res = axios({
+    method: "get",
+    url: `${BaseUrl}/saved_pets/${userId}`,
     headers: {
       Authorization: `Bearer ` + token,
     },

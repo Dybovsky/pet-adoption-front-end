@@ -1,26 +1,42 @@
 import { AuthContext } from "../AuthContext";
 import { useContext, useState } from "react";
-import { deletePet, returnPet, savePet, takePet } from "../../lib/data/pets";
+import {
+  deletePet,
+  returnPet,
+  savePet,
+  takePet,
+  unsavePet,
+} from "../../lib/data/pets";
 import { Link } from "react-router-dom";
 import ToggleSave from "./ToogleSave";
 import { v4 as uuidv4 } from "uuid";
+import localforage from "localforage";
 
 const PetDetails = ({ pet, refreshPets, closeModal }) => {
   const [isSaved, setIsSaved] = useState(false);
-
+  // const [transId, setTransId] = useState(null);
   let authUser = useContext(AuthContext).authUser;
   if (!authUser)
     return <div>Look but don't touch! Enter your account to continue 🙀</div>;
   let token = authUser.token;
 
-  const onToggleSave = () => {
-    setIsSaved(!isSaved);
-
-    saveToMyPets();
+  const id = uuidv4();
+  const onSavePet = async (petId, token) => {
+    localforage.setItem("transId", id);
+    await savePet(id, petId, token);
   };
 
-  const saveToMyPets = () => {
-    !isSaved && savePet(uuidv4(), pet.id, token);
+  const onToggleSave = () => {
+    setIsSaved(!isSaved);
+    !isSaved && onSavePet(pet.id, token);
+    isSaved && onUnsavePet();
+  };
+
+  const onUnsavePet = async () => {
+    if (localforage.getItem("transId")) {
+      const id = await localforage.getItem("transId");
+      unsavePet(id, token);
+    }
   };
 
   // let isAdopted = pet.status === "adopted";

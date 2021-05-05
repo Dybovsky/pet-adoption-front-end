@@ -6,9 +6,9 @@ const Toggle = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   const { onToggle } = props;
 
-  const handleChange = () => {
-    onToggle(!isChecked);
-    setIsChecked(!isChecked);
+  const handleChange = async () => {
+    await setIsChecked(!isChecked);
+    await onToggle(isChecked);
   };
 
   return (
@@ -19,7 +19,7 @@ const Toggle = (props) => {
         checked={isChecked}
         uncheckedIcon={false}
         checkedIcon={false}
-        onColor={"#60B0F4"}
+        onColor={"#CD8940"}
       />
     </label>
   );
