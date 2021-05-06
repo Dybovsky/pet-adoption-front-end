@@ -6,9 +6,9 @@ const Toggle = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   const { onToggle } = props;
 
-  const handleChange = async () => {
-    await setIsChecked(!isChecked);
-    await onToggle(isChecked);
+  const handleChange = () => {
+    setIsChecked(!isChecked);
+    onToggle(isChecked);
   };
 
   return (

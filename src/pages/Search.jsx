@@ -1,21 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import PetsList from "../components/MyPets/PetsList";
 import ToAdvancedSearchBtn from "../components/Search/ToAdvancedSearchBtn";
-import { getPets, getPetsByType } from "../lib/data/pets";
+import { getAllPets, getPets, getPetsByType } from "../lib/data/pets";
+import { AuthContext } from "../components/AuthContext";
 
 const Search = () => {
+  const authUser = useContext(AuthContext);
+  // const token = authUser.token;
   const [pets, setPets] = useState([]);
   const [searchedAdvPets, setSearchedAdvPets] = useState(null);
 
   useEffect(() => {
     refreshPets();
-  }, []);
+  }, [authUser.authUser]);
 
   const refreshPets = () => {
-    getPets().then((pets) => {
-      setPets(pets.pets);
-    });
+    console.log("user", authUser.authUser);
+    if (authUser.authUser) {
+      getAllPets(authUser.authUser.token).then((pets) => {
+        setPets(pets.data.pets);
+      });
+    } else {
+      getPets().then((pets) => {
+        setPets(pets.pets);
+      });
+    }
   };
 
   const [searchField, setSearchField] = useState("");

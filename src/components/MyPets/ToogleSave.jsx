@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Switch from "react-switch";
 // import icon from "/icons8-save-26.png";
-const ToggleSave = ({ onToggleSave }) => {
+const ToggleSave = ({
+  onToggleSave,
+  // isChecked
+  refreshPets,
+  isSaved,
+}) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    isSaved ? setIsChecked(true) : setIsChecked(false);
+  }, [isSaved]);
 
   const handleChange = async () => {
     await setIsChecked(!isChecked);
     await onToggleSave(isChecked);
+    refreshPets();
   };
 
   return (

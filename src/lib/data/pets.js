@@ -180,3 +180,14 @@ export async function getSavedPets(userId, token) {
   });
   return res;
 }
+
+export async function getAllPets(token) {
+  const result = axios({
+    method: "get",
+    url: `${BaseUrl}/all_pets/`,
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
+  return result;
+}

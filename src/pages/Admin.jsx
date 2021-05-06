@@ -1,18 +1,21 @@
 import ToDashboardBtn from "../components/admin/ToDashboardBtn";
 import AddPetBtn from "../components/admin/AddPetBtn";
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState, useReducer, useContext } from "react";
 import { getUsers } from "../lib/data/apiUsers";
-import { getPets } from "../lib/data/pets";
+import { getAllPets, getPets } from "../lib/data/pets";
+import { AuthContext } from "../components/AuthContext";
 
 const Admin = () => {
+  const authUser = useContext(AuthContext);
+
   const [users, setUsers] = useState([]);
   const [pets, setPets] = useState([]);
 
   // const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
   const refreshPets = async () => {
-    await getPets().then((pets) => {
-      setPets(pets.pets);
+    await getAllPets(authUser.authUser.token).then((pets) => {
+      setPets(pets.data.pets);
     });
     // forceUpdate();
   };

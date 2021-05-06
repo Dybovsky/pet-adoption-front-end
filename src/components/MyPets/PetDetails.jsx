@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import localforage from "localforage";
 
 const PetDetails = ({ pet, refreshPets, closeModal }) => {
-  const [isSaved, setIsSaved] = useState(false);
+  // const [isSaved, setIsSaved] = useState(false);
   // const [transId, setTransId] = useState(null);
   let authUser = useContext(AuthContext).authUser;
   if (!authUser)
@@ -26,16 +26,17 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
     await savePet(id, petId, token);
   };
 
-  const onToggleSave = () => {
-    setIsSaved(!isSaved);
-    !isSaved && onSavePet(pet.id, token);
-    isSaved && onUnsavePet();
+  const onToggleSave = async () => {
+    // setIsSaved(!isSaved);
+    pet.saved = !pet.saved;
+    pet.saved && (await onSavePet(pet.id, token));
+    !pet.saved && (await onUnsavePet());
   };
 
   const onUnsavePet = async () => {
     if (localforage.getItem("transId")) {
       const id = await localforage.getItem("transId");
-      unsavePet(id, token);
+      await unsavePet(id, token);
     }
   };
 
@@ -47,6 +48,9 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
   let isFostered = pet.status === "fostered";
 
   let status = isFostered ? "adopted" : "fostered";
+  let isSaved = pet.saved;
+
+  console.log("saved", isSaved);
 
   return (
     <div>
@@ -115,7 +119,13 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
             {isFostered ? "Adopt" : "Foster"}
           </button>
         )}
-        <ToggleSave onToggleSave={onToggleSave}> </ToggleSave>
+        <ToggleSave
+          onToggleSave={onToggleSave}
+          isSaved={isSaved}
+          refreshPets={() => {
+            refreshPets(token);
+          }}
+        ></ToggleSave>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const MyPetsPage = () => {
   // const [isChecked, setIsChecked] = useState(false);
   // const [authUser, setAuthUser] = useState(null);
   const [myPets, setMyPets] = useState(null);
-  const [savedPets, setSavedPets] = useState(null);
+  const [savedPets, setSavedPets] = useState([]);
   // useContext(AuthContext).authUser.then((user) => {
   //   let token = user.token;
   // });
@@ -25,21 +25,22 @@ const MyPetsPage = () => {
       console.error(err);
     }
   }
-
+  console.log("sae", saved);
   // const token = authUser.token;
 
-  const onToggle = async () => {
-    await setSaved(!saved);
+  const onToggle = () => {
+    setSaved(!saved);
     //await loadSavedPets();
   };
   //let savedPets = allPets.filter((pet) => pet.saved);
   const loadSavedPets = async () => {
-    if (saved) {
-      const user = await getAuthUser();
-      const pets = await getSavedPets(user.id);
-      await setSavedPets(pets.data);
-    }
+    // if (saved) {
+    const user = await getAuthUser();
+    const pets = await getSavedPets(user.id);
+    await setSavedPets(pets.data);
+    // }
   };
+
   // useEffect(() => {
   //   isChecked ? setSaved(savedPets) : setSaved();
   //   const pets = getPets();
@@ -51,6 +52,7 @@ const MyPetsPage = () => {
     getPetsByUserId(token).then((pets) => {
       setMyPets(pets);
     });
+    loadSavedPets();
   }
 
   useEffect(() => {
@@ -58,10 +60,11 @@ const MyPetsPage = () => {
     //   setMyPets(pets);
     // });
     loadSavedPets();
+
     getAuthUser().then((user) => {
       refreshPets(user.token);
     });
-  }, [saved]);
+  }, []);
 
   //console.log(myPets);
   // console.log(token);
@@ -74,14 +77,15 @@ const MyPetsPage = () => {
           {myPets ? (
             <PetsList pets={myPets} refreshPets={refreshPets} />
           ) : (
-            <h2>You dont have any fat cats</h2>
+            <h2>You don't have any fat cats</h2>
           )}
-          {myPets && myPets.length < 1 && <h2>You dont have any fat cats</h2>}
+          {myPets && myPets.length < 1 && <h2>You don't have any fat cats</h2>}
           {/* {saved && <PetsList myPets={saved} />}  */}
         </div>
+      ) : savedPets.length !== 0 ? (
+        <PetsList pets={savedPets} refreshPets={refreshPets} />
       ) : (
-        savedPets && <PetsList pets={savedPets} />
-        // <h2>You dont have any saved fat cats</h2>
+        <h2>You don't have any saved fat cats</h2>
       )}
     </>
   );
