@@ -159,6 +159,7 @@ code {
   border-radius: 5px;
   padding: 5px;
   background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.35), transparent);
+  width: 40%;
 }
 
 h3 {
@@ -205,7 +206,8 @@ input {
   padding: 10px;
 }
 .autocomplete_item:hover {
-  background: violet;
+  text-decoration: underline;
+
   cursor: pointer;
   transition: cubic-bezier(1, 0, 0, 1) 0.3s all;
 }

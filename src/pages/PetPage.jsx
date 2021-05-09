@@ -20,22 +20,12 @@ const PetPage = () => {
     allergy: "",
     diet: "",
   });
-  //   let cat = await getPetById(petId, token);
-  // console.log(cat);
-  //
 
   useEffect(() => {
     getPetById(petId, token).then((resp) => {
       setEditedPet(resp.data.response[0]);
-      // console.log("pet edi", resp.data.response[0]);
     });
   }, [petId, token]);
-
-  // if (!pet) {
-  //   return <div>no pet</div>;
-  // }
-  //   const authUser = useContext(AuthContext).authUser;
-  //   const token = authUser.token;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -108,13 +98,7 @@ const PetPage = () => {
         </label>
         <label className="form-row">
           Picture:
-          <input
-            //value={editedPet.picture}
-            name="picture"
-            type="file"
-            onChange={updateEditedPet}
-            //onChange={(e) => setPic(e.target.files[0])}
-          />
+          <input name="picture" type="file" onChange={updateEditedPet} />
         </label>
         <label className="form-row">
           Color:
@@ -154,19 +138,6 @@ const PetPage = () => {
         </label>
         <button className="btn-primary">Edit</button>
       </form>
-      {/* <div>
-        <img src={pet.picture} alt="cat" />
-      </div>
-      <div>Name: {pet.name}</div>
-      <div>Status: {pet.status}</div>
-      <div>Type: {pet.type}</div>
-      <div>Height: {pet.height}</div>
-      <div>Weight: {pet.weight}</div>
-      <div>Color: {pet.color}</div>
-      <div>Bio: {pet.bio}</div>
-      <div>Allergy: {pet.allergy}</div>
-      <div>Diet: {pet.diet}</div>
-      <button onClick={editPet()}>Edit pet</button> */}
     </div>
   );
 };

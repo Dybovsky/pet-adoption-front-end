@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useState } from "react";
 import Switch from "react-switch";
 
@@ -19,7 +18,7 @@ const Toggle = (props) => {
         checked={isChecked}
         uncheckedIcon={false}
         checkedIcon={false}
-        onColor={"#CD8940"}
+        onColor={"#0c0b0b"}
       />
     </label>
   );

@@ -8,9 +8,6 @@ const Navigation = () => {
   const authUser = useContext(AuthContext).authUser;
   return (
     <div className="navigation">
-      {/* <Link to="/search">
-            <ToSearchPage />
-        </Link> */}
       <Link to="/">
         <div>
           <img src="LogoCat.png" width="120" height="100" alt="home" />

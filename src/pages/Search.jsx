@@ -1,13 +1,13 @@
 import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+
 import PetsList from "../components/MyPets/PetsList";
 import ToAdvancedSearchBtn from "../components/Search/ToAdvancedSearchBtn";
-import { getAllPets, getPets, getPetsByType } from "../lib/data/pets";
+import { getAllPets, getPets } from "../lib/data/pets";
 import { AuthContext } from "../components/AuthContext";
 
 const Search = () => {
   const authUser = useContext(AuthContext);
-  // const token = authUser.token;
+
   const [pets, setPets] = useState([]);
   const [searchedAdvPets, setSearchedAdvPets] = useState(null);
 
@@ -16,7 +16,6 @@ const Search = () => {
   }, [authUser.authUser]);
 
   const refreshPets = () => {
-    console.log("user", authUser.authUser);
     if (authUser.authUser) {
       getAllPets(authUser.authUser.token).then((pets) => {
         setPets(pets.data.pets);
@@ -29,7 +28,6 @@ const Search = () => {
   };
 
   const [searchField, setSearchField] = useState("");
-  // const [searchRes, setSearchRes] = useState(null);
 
   const handleInput = (e) => {
     setSearchField(e.target.value);
@@ -59,11 +57,6 @@ const Search = () => {
   };
 
   const [isOpen, setIsOpen] = useState(true);
-
-  // const makeSearch = async (query) => {
-  //   const result = await getPetsByType(query);
-  //   setSearchRes(result);
-  // };
 
   const onAdvSearch = (searchedPets) => {
     setSearchedAdvPets(searchedPets);
@@ -100,20 +93,13 @@ const Search = () => {
           </ul>
         </label>
       </form>
-      {/* <button className="btn-primary" onClick={() => makeSearch(searchField)}>
-        Search
-      </button> */}
+
       <ToAdvancedSearchBtn onAdvSearch={onAdvSearch} />
       {!searchedAdvPets ? (
         <PetsList pets={filteredPets} refreshPets={refreshPets} />
       ) : (
         <PetsList pets={searchedAdvPets} refreshPets={refreshPets} />
       )}
-      {/* {!searchRes ? (
-        <PetsList pets={pets} refreshPets={refreshPets} />
-      ) : (
-        <PetsList pets={searchRes} refreshPets={refreshPets} />
-      )} */}
     </div>
   );
 };

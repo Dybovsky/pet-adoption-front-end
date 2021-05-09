@@ -1,9 +1,20 @@
 import { useContext, useEffect, useState } from "react";
+import localforage from "localforage";
 import { AuthContext } from "../components/AuthContext";
 import { getUserByEmail } from "../lib/data/apiUsers";
 
 const Settings = () => {
   const authUser = useContext(AuthContext);
+  // let authUser;
+  // localforage.getItem("authUser").then((user) => {
+  //   authUser = user;
+  // });
+
+  useEffect(() => {
+    localforage.getItem("authUser").then((authUser) => {
+      getUserByEmail(authUser.email).then((user) => setUpdatedUser(user));
+    });
+  }, []);
 
   const [updatedUser, setUpdatedUser] = useState({
     firstName: "",
@@ -12,6 +23,7 @@ const Settings = () => {
     phone: "",
     password: "",
   });
+  // console.log("auth", authUser);
 
   const saveSettings = (e) => {
     e.preventDefault();
@@ -24,12 +36,6 @@ const Settings = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  useEffect(() => {
-    getUserByEmail(authUser.authUser.email).then((user) =>
-      setUpdatedUser(user)
-    );
-  }, []);
 
   return (
     <div className="settings back-linear">
@@ -78,9 +84,10 @@ const Settings = () => {
             name="password"
             type="password"
             onChange={updateUser}
+            placeholder="Enter new password"
           />
         </label>
-        <button className="btn-primary">Save</button>
+        {updatedUser.password && <button className="btn-primary">Save</button>}
       </form>
     </div>
   );

@@ -10,15 +10,13 @@ import Navigation from "./pages/Navigation";
 import MyPetsPage from "./pages/MyPetsPage";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin.jsx";
-import { getPets } from "./lib/data/pets";
-import { getUsers, editUser } from "./lib/data/apiUsers";
-import PetDetails from "./components/MyPets/PetDetails";
+
+import { editUser } from "./lib/data/apiUsers";
+
 import PetPage from "./pages/PetPage";
 
 function App() {
   const [authUser, setAuthUser] = useState(null);
-  // const [users, setUsers] = useState([]);
-  // const [pets, setPets] = useState([]);
 
   async function getAuthUser() {
     try {
@@ -28,22 +26,11 @@ function App() {
       console.error(err);
     }
   }
+  console.log("auth app", authUser);
 
   useEffect(() => {
     getAuthUser();
   }, []);
-
-  // useEffect(() => {
-  //   getUsers().then((users) => {
-  //     setUsers(users);
-  //   });
-  //   getPets().then((pets) => {
-  //     setPets(pets.pets);
-  //   });
-  //   getAuthUser();
-  // }, []);
-
-  // console.log(pets);
 
   return (
     <AuthContext.Provider
@@ -52,8 +39,6 @@ function App() {
         login: (us) => {
           setAuthUser(us);
           localforage.setItem("authUser", us);
-
-          // let test = await localforage.getItem("authUser");
         },
         logout: () => {
           setAuthUser(null);
@@ -87,12 +72,6 @@ function App() {
           <Route path="/pet/:petId">
             <PetPage />
           </Route>
-          {/* <Route path="/advanced_search">
-            <AdvancedSearch />
-          </Route> */}
-          {/* <Route path="/admin">
-            <Admin users={users} pets={pets} />
-          </Route> */}
         </Switch>
       </Router>
     </AuthContext.Provider>

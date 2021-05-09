@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Switch from "react-switch";
-// import icon from "/icons8-save-26.png";
+
 const ToggleSave = ({
   onToggleSave,
-  // isChecked
+
   refreshPets,
   isSaved,
 }) => {

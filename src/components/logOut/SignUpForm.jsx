@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../AuthContext";
 import { createUser, getUserByEmail, logIn } from "../../lib/data/apiUsers";
 
@@ -18,25 +18,26 @@ const SignUpForm = (props) => {
     password: "",
   });
 
-  const submitSignUp = (e) => {
+  const submitSignUp = async (e) => {
     e.preventDefault();
     if (signUpUser.password !== signUpUser.passwordCheck) {
       alert("Check password match!");
       return;
     }
-    createUser(signUpUser).then((user) => {
-      getUserByEmail(user.email).then((fullUser) => {
-        fullUser.token = user.token;
-        userCont.login(fullUser);
-      });
-    });
-    //let curUser = getUserByEmail(signUpUser.email);
 
-    // curUser.token =  token;
-    //user.login(curUser);
-    //const authUser = JSON.stringify(signUpUser)
+    await createUser(signUpUser);
+    let authUser = await logIn(signUpUser);
+    let token = authUser.token;
+    let curUser = await getUserByEmail(authUser.user.email);
+    curUser.token = token;
+    userCont.login(curUser);
 
-    //
+    // createUser(signUpUser).then((user) => {
+    //   getUserByEmail(user.email).then((fullUser) => {
+    //     fullUser.token = user.token;
+    //     userCont.login(fullUser);
+    //   });
+    // });
   };
 
   const submitLogIn = async (e) => {
@@ -50,8 +51,6 @@ const SignUpForm = (props) => {
     } catch (err) {
       console.error(err);
     }
-    //props.onLogIn(logInUser)
-    //
   };
 
   const updateSignUp = (e) => {

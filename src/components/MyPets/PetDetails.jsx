@@ -1,5 +1,5 @@
 import { AuthContext } from "../AuthContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import {
   deletePet,
   returnPet,
@@ -13,8 +13,6 @@ import { v4 as uuidv4 } from "uuid";
 import localforage from "localforage";
 
 const PetDetails = ({ pet, refreshPets, closeModal }) => {
-  // const [isSaved, setIsSaved] = useState(false);
-  // const [transId, setTransId] = useState(null);
   let authUser = useContext(AuthContext).authUser;
   if (!authUser)
     return <div>Look but don't touch! Enter your account to continue 🙀</div>;
@@ -27,7 +25,6 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
   };
 
   const onToggleSave = async () => {
-    // setIsSaved(!isSaved);
     pet.saved = !pet.saved;
     pet.saved && (await onSavePet(pet.id, token));
     !pet.saved && (await onUnsavePet());
@@ -40,8 +37,6 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
     }
   };
 
-  // let isAdopted = pet.status === "adopted";
-  // let isFoster = pet.status === "foster";
   let isAdmin = authUser.role === "admin";
   let isAvailable = !pet.Owner_Id;
   let isMyPet = pet.Owner_Id === authUser.id;
@@ -50,8 +45,6 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
   let status = isFostered ? "adopted" : "fostered";
   let isSaved = pet.saved;
 
-  console.log("saved", isSaved);
-
   return (
     <div>
       <div
@@ -59,10 +52,7 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
         onClick={() => closeModal()}
         style={{ cursor: "pointer" }}
       >
-        <div
-        // onClick={() => closeModal()}
-        // style={{ cursor: "pointer" }}
-        >
+        <div>
           <img src={pet.picture} alt="cat" className="catImg" />
         </div>
         <div>Name: {pet.name}</div>
@@ -75,10 +65,7 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
         <div>Allergy: {pet.allergy ? "Yes" : "No"}</div>
         <div>Diet: {pet.diet}</div>
       </div>
-      {/* {(isFoster || isAdopted) && <button>Return pet</button>} */}
-      {/* <button onClick={() => saveCat()}>
-        {pet.saved ? "Remove from saves" : "Save"}
-      </button> */}
+
       <div className="pet-card-btn">
         {isMyPet && (
           <button
@@ -86,7 +73,6 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
             onClick={async () => {
               await returnPet(pet.id, token);
               await refreshPets(token);
-              //closeModal();
             }}
           >
             Return
@@ -98,7 +84,6 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
             onClick={async () => {
               await deletePet(pet.id, token);
               await refreshPets(token);
-              //closeModal();
             }}
           >
             Delete
@@ -113,7 +98,6 @@ const PetDetails = ({ pet, refreshPets, closeModal }) => {
             onClick={async () => {
               await takePet(pet.id, token, status);
               await refreshPets(token);
-              //closeModal();
             }}
           >
             {isFostered ? "Adopt" : "Foster"}

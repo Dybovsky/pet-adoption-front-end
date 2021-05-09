@@ -22,11 +22,9 @@ const AdvancedSearch = ({ onAdvSearch }) => {
     });
   };
   const makeAdvSearch = async (searchObj) => {
-    // console.log("search obj", searchObj);
     const result = await getPetsByAdvSearch(searchObj);
-    // setSearchedPets(result);
+
     onAdvSearch(result);
-    //works from sec time
   };
 
   return (

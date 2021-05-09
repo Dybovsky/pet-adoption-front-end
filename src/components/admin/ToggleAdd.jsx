@@ -11,7 +11,6 @@ const ToggleAdd = ({ onToggleAdd }) => {
 
   return (
     <label>
-      {/* <span>Saved Pets</span> */}
       <Switch
         onChange={handleChange}
         checked={isChecked}
